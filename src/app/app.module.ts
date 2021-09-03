@@ -7,6 +7,8 @@ import { MainPageComponent } from './components/main-page/main-page.component';
 import { ProfilePageComponent } from './components/profile-page/profile-page.component';
 import { ProjectPageComponent } from './components/project-page/project-page.component';
 import { KeycloakAngularModule, KeycloakService } from 'keycloak-angular';
+import { HeaderComponent } from './components/header/header.component';
+import { FilterBarComponent } from './components/filter-bar/filter-bar.component';
 
 function initializeKeycloak(keycloak: KeycloakService) {
   return () =>
@@ -32,7 +34,9 @@ function initializeKeycloak(keycloak: KeycloakService) {
     AppComponent,
     MainPageComponent,
     ProfilePageComponent,
-    ProjectPageComponent
+    ProjectPageComponent,
+    HeaderComponent,
+    FilterBarComponent
   ],
   imports: [
     BrowserModule,

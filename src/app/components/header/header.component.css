@@ -1,0 +1,5 @@
+header {
+    border: black solid 4px;
+    box-sizing: border-box;
+    height: var(--header-height);
+}

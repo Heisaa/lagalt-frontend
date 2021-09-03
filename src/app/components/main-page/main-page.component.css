@@ -1,0 +1,32 @@
+main {
+    min-height: 100%;
+    display: grid;
+    grid-template-areas: 
+                    "leftSideBar filterBar rightSideBar"
+                    "leftSideBar projectFeed rightSideBar";
+    grid-template-columns: 200px auto 200px;
+    grid-template-rows: 150px auto;
+    gap: 20px;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+#leftSide {
+    background-color: lightgray;
+    grid-area: leftSideBar;
+}
+
+#rightSide {
+    background-color: lightgray;
+    grid-area: rightSideBar;
+}
+
+#filterBarContainer{
+    background-color: lightgray;
+    grid-area: filterBar;
+}
+
+#projectFeed {
+    background-color: lightgray;
+    grid-area: projectFeed;
+}
