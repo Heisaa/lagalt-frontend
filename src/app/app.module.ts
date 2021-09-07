@@ -18,7 +18,7 @@ function initializeKeycloak(keycloak: KeycloakService) {
       config: {
         url: 'https://keycloak-auth-lagalt.herokuapp.com/auth',
         realm: 'lagalt',
-        clientId: 'lagalt',
+        clientId: 'lagaltAPI',
       },
       initOptions: {
         checkLoginIframe: true,
