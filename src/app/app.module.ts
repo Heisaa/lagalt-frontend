@@ -18,7 +18,7 @@ function initializeKeycloak(keycloak: KeycloakService) {
       config: {
         url: 'https://keycloak-auth-lagalt.herokuapp.com/auth',
         realm: 'lagalt',
-        clientId: 'lagaltAPI',
+        clientId: 'lagalt',
       },
       initOptions: {
         checkLoginIframe: true,
@@ -28,6 +28,8 @@ function initializeKeycloak(keycloak: KeycloakService) {
         // silentCheckSsoRedirectUri:
         //   window.location.origin + '/assets/silent-check-sso.html',
       },
+      enableBearerInterceptor: true,
+      bearerPrefix: 'Bearer',
     });
 }
 
