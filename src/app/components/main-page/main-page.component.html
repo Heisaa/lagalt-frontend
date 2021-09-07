@@ -2,9 +2,9 @@
     <div id="leftSide" class="sideBar">
 
     </div>
-    <div id="filterBarContainer" class="barContainer">
-        <app-filter-bar></app-filter-bar>
-    </div>
+
+    <app-filter-bar [fields]="fields" (fieldFilterEvent)="filterFields($event)" id="filterBarContainer"></app-filter-bar>
+
     <div id="projectFeed">
 
     </div>

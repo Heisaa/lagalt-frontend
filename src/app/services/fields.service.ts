@@ -6,11 +6,11 @@ import { Field } from '../models/field.model';
   providedIn: 'root'
 })
 export class FieldsService {
-  fieldsUrl = "http://localhost:3000/fields";
+  private fieldsUrl = "http://localhost:3000/fields";
 
-  constructor(private http: HttpClient) { }
+  constructor(private readonly http: HttpClient) { }
 
   getFields() {
-    return this.http.get<Field>(this.fieldsUrl);
+    return this.http.get<Field[]>(this.fieldsUrl);
   }
 }

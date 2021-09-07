@@ -1,0 +1,11 @@
+.fieldForm {
+    width: 230px;
+}
+
+@media screen and (max-width: 1000px) {
+    .barContainer{
+        height: 150px;
+        display: flex;
+        justify-items: center;
+    }
+}

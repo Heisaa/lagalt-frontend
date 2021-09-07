@@ -9,6 +9,8 @@ import { ProjectPageComponent } from './components/project-page/project-page.com
 import { KeycloakAngularModule, KeycloakService } from 'keycloak-angular';
 import { HeaderComponent } from './components/header/header.component';
 import { FilterBarComponent } from './components/filter-bar/filter-bar.component';
+import { HttpClientModule } from '@angular/common/http';
+import { FilterFieldsPipe } from './pipes/filter-fields.pipe';
 
 function initializeKeycloak(keycloak: KeycloakService) {
   return () =>
@@ -36,12 +38,14 @@ function initializeKeycloak(keycloak: KeycloakService) {
     ProfilePageComponent,
     ProjectPageComponent,
     HeaderComponent,
-    FilterBarComponent
+    FilterBarComponent,
+    FilterFieldsPipe
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    KeycloakAngularModule
+    KeycloakAngularModule,
+    HttpClientModule
   ],
   providers: [
     {

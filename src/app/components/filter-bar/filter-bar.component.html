@@ -1,9 +1,12 @@
 <nav class="navbar navbar-light bg-light navbar-expand-lg">
-
-    <div class="container-fluid">
+    <div class="container-fluid barContainer">
         <span class="navbar-brand">Find Projects</span>
-        <select class="form-select">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+        <select class="form-select fieldForm" (change)="onFieldChange($event)">
             <option value="" disabled selected>Select a field</option>
+            <option value="all">View All</option>
+            <option [value]="field.id" *ngFor="let field of fields">{{field.name}}</option>
+
         </select>
     </div>
 </nav>
