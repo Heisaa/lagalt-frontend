@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { KeycloakService } from 'keycloak-angular';
 import { Field } from 'src/app/models/field.model';
 import { Project } from 'src/app/models/project.model';
 import { FieldsService } from 'src/app/services/fields.service';
@@ -12,7 +13,7 @@ export class MainPageComponent implements OnInit {
   fields: Field[] = [];
   projects: Project[] = [];
 
-  constructor(private readonly fieldService: FieldsService) { }
+  constructor(private readonly fieldService: FieldsService, private readonly keycloak: KeycloakService) { }
 
   filterFields(fieldId: number | null) {
     console.log(fieldId);
@@ -27,6 +28,10 @@ export class MainPageComponent implements OnInit {
 
   ngOnInit(): void {
     this.getFields();
+  }
+
+  logOut() {
+    this.keycloak.logout();
   }
 
 }

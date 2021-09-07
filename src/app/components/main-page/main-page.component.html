@@ -1,6 +1,6 @@
 <main>
     <div id="leftSide" class="sideBar">
-
+        <button (click)="logOut()">logout</button>
     </div>
 
     <app-filter-bar [fields]="fields" (fieldFilterEvent)="filterFields($event)" id="filterBarContainer"></app-filter-bar>
