@@ -3,6 +3,7 @@ import { KeycloakService } from 'keycloak-angular';
 import { Field } from 'src/app/models/field.model';
 import { Project } from 'src/app/models/project.model';
 import { FieldsService } from 'src/app/services/fields.service';
+import { ProjectsService } from 'src/app/services/projects.service';
 
 @Component({
   selector: 'app-main-page',
@@ -13,7 +14,16 @@ export class MainPageComponent implements OnInit {
   fields: Field[] = [];
   projects: Project[] = [];
 
-  constructor(private readonly fieldService: FieldsService, private readonly keycloak: KeycloakService) { }
+  constructor(
+    private readonly fieldService: FieldsService, 
+    private readonly projectService: ProjectsService
+    ) { }
+
+    
+  ngOnInit(): void {
+    this.getFields();
+    this.getProjects();
+  }
 
   filterFields(fieldId: number | null) {
     console.log(fieldId);
@@ -23,15 +33,14 @@ export class MainPageComponent implements OnInit {
     this.fieldService.getFields()
       .subscribe((data: Field[]) => {
         this.fields = data;
-      })
+      });
   }
 
-  ngOnInit(): void {
-    this.getFields();
-  }
-
-  logOut() {
-    this.keycloak.logout();
+  getProjects() {
+    this.projectService.getProjects()
+      .subscribe((data: Project[]) => {
+        this.projects = data;
+      });
   }
 
 }

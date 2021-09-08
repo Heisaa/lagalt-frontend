@@ -1,3 +1,18 @@
-<header>
-    <h1>header</h1>
+<header class="container">
+    <nav class="navbar navbar-dark bg-dark text-light">
+        <a class="navbar-brand" href="#">Navbar</a>
+        <button (click)="logIn()" class="btn btn-light">Log In</button>
+        <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+              Dropdown button
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+              <li><a class="dropdown-item" href="#">Action</a></li>
+              <li><a class="dropdown-item" href="#">Another action</a></li>
+              <li><a class="dropdown-item" href="#">Something else here</a></li>
+            </ul>
+          </div>
+        
+        <button (click)="logOut()">logout</button>
+    </nav>
 </header>

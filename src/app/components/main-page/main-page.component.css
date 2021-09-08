@@ -7,7 +7,6 @@ main {
     grid-template-columns: 200px auto 200px;
     grid-template-rows: 56px auto;
     gap: 20px;
-    padding: 20px;
     box-sizing: border-box;
 }
 
@@ -32,11 +31,14 @@ main {
 }
 
 @media screen and (max-width: 1000px) {
+
     main {
         grid-template-areas: 
                     "filterBar"
                     "projectFeed";
         grid-template-columns: 100%;
-        grid-template-rows: 150px auto;
+        grid-template-rows: auto auto;
     }
+
+    
 }

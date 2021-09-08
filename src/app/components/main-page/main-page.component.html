@@ -1,12 +1,12 @@
-<main>
+<main class="container">
     <div id="leftSide" class="sideBar">
-        <button (click)="logOut()">logout</button>
+        
     </div>
 
     <app-filter-bar [fields]="fields" (fieldFilterEvent)="filterFields($event)" id="filterBarContainer"></app-filter-bar>
 
     <div id="projectFeed">
-
+        <app-project-banner class="accordion" *ngFor="let project of projects" [project]="project"></app-project-banner>
     </div>
     <div id="rightSide" class="sideBar">
 

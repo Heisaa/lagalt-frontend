@@ -11,6 +11,7 @@ import { HeaderComponent } from './components/header/header.component';
 import { FilterBarComponent } from './components/filter-bar/filter-bar.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FilterFieldsPipe } from './pipes/filter-fields.pipe';
+import { ProjectBannerComponent } from './components/project-banner/project-banner.component';
 
 function initializeKeycloak(keycloak: KeycloakService) {
   return () =>
@@ -41,7 +42,8 @@ function initializeKeycloak(keycloak: KeycloakService) {
     ProjectPageComponent,
     HeaderComponent,
     FilterBarComponent,
-    FilterFieldsPipe
+    FilterFieldsPipe,
+    ProjectBannerComponent
   ],
   imports: [
     BrowserModule,

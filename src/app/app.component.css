@@ -2,7 +2,7 @@
     min-height: 100vh;
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-rows: var(--header-height) 0px auto var(--footer-height);
+    grid-template-rows: auto 0px 1fr var(--footer-height);
 }
 
 footer {
