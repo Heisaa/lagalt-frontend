@@ -13,6 +13,7 @@ import { ProjectsService } from 'src/app/services/projects.service';
 export class MainPageComponent implements OnInit {
   fields: Field[] = [];
   projects: Project[] = [];
+  filteredProjects: Project[] = [];
 
   constructor(
     private readonly fieldService: FieldsService, 
@@ -25,8 +26,18 @@ export class MainPageComponent implements OnInit {
     this.getProjects();
   }
 
+  filterSearch(search: string) {
+    console.log(search);
+  }
+
+  // Filter projects according to the selected field in the filterbar
   filterFields(fieldId: number | null) {
-    console.log(fieldId);
+    if(fieldId != null) {
+      this.filteredProjects = this.projects.filter(project => project.fields.some(field => field.id === fieldId))
+    } else {
+      this.filteredProjects = this.projects;
+    }
+    console.log(this.filteredProjects)
   }
 
   getFields() {
@@ -40,6 +51,7 @@ export class MainPageComponent implements OnInit {
     this.projectService.getProjects()
       .subscribe((data: Project[]) => {
         this.projects = data;
+        this.filteredProjects = data;
       });
   }
 

@@ -21,6 +21,7 @@ export class ProfilePageComponent implements OnInit {
     if (this.isLoggedIn) {
       this.userProfile = await this.keycloak.loadUserProfile();
     }
+    
     this.keycloak.getToken()
     .then(token=>this.token=token)
   }

@@ -1,18 +1,21 @@
 <header class="container">
     <nav class="navbar navbar-dark bg-dark text-light">
-        <a class="navbar-brand" href="#">Navbar</a>
-        <button (click)="logIn()" class="btn btn-light">Log In</button>
-        <div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-              Dropdown button
-            </button>
-            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-              <li><a class="dropdown-item" href="#">Action</a></li>
-              <li><a class="dropdown-item" href="#">Another action</a></li>
-              <li><a class="dropdown-item" href="#">Something else here</a></li>
-            </ul>
-          </div>
-        
-        <button (click)="logOut()">logout</button>
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Navbar</a>
+            <div class="dropdown" *ngIf="isLoggedIn else loginButton">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
+                    data-bs-toggle="dropdown" aria-expanded="false">
+                    <span *ngIf="userProfile">{{userProfile.username}}</span>
+                </button>
+                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton1">
+                    <li><button class="dropdown-item" (click)="gotoProfile()">Profile</button></li>
+                    <li><button class="dropdown-item" (click)="logOut()">Log Out</button></li>
+                </ul>
+            </div>
+            <ng-template #loginButton>
+                <button (click)="logIn()" class="btn btn-light">Log In</button>
+            </ng-template>
+        </div>
     </nav>
+
 </header>
