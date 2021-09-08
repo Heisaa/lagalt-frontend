@@ -1,0 +1,27 @@
+main {
+    min-height: 100%;
+    display: grid;
+    grid-template-areas: 
+                    "profileDivContainer rightContainer"
+                    "middleContainer rightContainer";
+    grid-template-columns: auto 230px;
+    grid-template-rows: 250px auto;
+    gap: 20px;
+    box-sizing: border-box; 
+    
+}
+
+.middleContainer {
+    background-color: lightgray;
+    grid-area: middleContainer;
+}
+
+.rightContainer {
+    background-color: lightgray;
+    grid-area: rightContainer;
+}
+
+.profileDivContainer {
+    background-color: lightgray;
+    grid-area: profileDivContainer;
+}
