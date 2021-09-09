@@ -1,21 +1,36 @@
-<header class="container">
-    <nav class="navbar navbar-dark bg-dark text-light">
+<header class="bg-dark">
+    <nav class="navbar navbar-expand-lg navbar-dark">
         <div class="container-fluid">
             <a class="navbar-brand" href="#">Navbar</a>
-            <div class="dropdown" *ngIf="isLoggedIn else loginButton">
-                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
+            <!-- <div class="dropdown" *ngIf="isLoggedIn else loginButton">
+                <button class="nav-link dropdown-toggle" type="button" id="dropdownMenuButton1"
                     data-bs-toggle="dropdown" aria-expanded="false">
                     <span *ngIf="userProfile">{{userProfile.username}}</span>
                 </button>
-                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton1">
+                <ul class="dropdown-menu dropdown-menu-end dropdown-menu-dark" aria-labelledby="dropdownMenuButton1">
                     <li><button class="dropdown-item" (click)="gotoProfile()">Profile</button></li>
                     <li><button class="dropdown-item" (click)="logOut()">Log Out</button></li>
                 </ul>
-            </div>
+            </div> -->
+
+
+            <ul class="navbar-nav" *ngIf="isLoggedIn else loginButton">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button"
+                        data-bs-toggle="dropdown" aria-expanded="false" *ngIf="userProfile">
+                        {{userProfile.username}}
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-end"
+                        aria-labelledby="navbarDarkDropdownMenuLink">
+                        <li><button class="dropdown-item" (click)="gotoProfile()">Profile</button></li>
+                        <li><button class="dropdown-item" (click)="logOut()">Log Out</button></li>
+                    </ul>
+                </li>
+            </ul>
+
             <ng-template #loginButton>
                 <button (click)="logIn()" class="btn btn-light">Log In</button>
             </ng-template>
         </div>
     </nav>
-
 </header>

@@ -1,12 +1,19 @@
-<main class="container">
-    <div id="leftSide" class="sideBar">
-        
+<main>
+    <div id="leftSide" class="sideBar" *ngIf="projectsForLoggedInUser">
+        <p class="text-secondary ms-3 mt-3">MY PROJECTS</p>
+        <div class="list-group list-group-flush">
+            <button class="list-group-item list-group-item-action" *ngFor="let project of projectsForLoggedInUser">
+                {{project.name}}
+            </button>
+        </div>
     </div>
 
-    <app-filter-bar (searchEvent)="filterSearch($event)" [fields]="fields" (fieldFilterEvent)="filterFields($event)" id="filterBarContainer"></app-filter-bar>
+    <app-filter-bar (searchEvent)="filterSearch($event)" [fields]="fields" (fieldFilterEvent)="filterFields($event)"
+        id="filterBarContainer"></app-filter-bar>
 
     <div id="projectFeed">
-        <app-project-banner class="accordion" *ngFor="let project of filteredProjects" [project]="project"></app-project-banner>
+        <app-project-banner class="accordion" *ngFor="let project of searchFilterdProjects" [project]="project">
+        </app-project-banner>
     </div>
     <div id="rightSide" class="sideBar">
 

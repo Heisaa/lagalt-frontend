@@ -3,6 +3,7 @@
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: auto 0px 1fr var(--footer-height);
+    background-color: #f8f9fa;
 }
 
 footer {

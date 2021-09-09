@@ -1,8 +1,11 @@
 /* You can add global styles to this file, and also import other style files */
 
 :root {
-    --header-height: 50px;
     --footer-height: 50px;
+}
+
+.white {
+    background-color: white;
 }
 
 body, h1, h2, h3, h4, h5, h6 {

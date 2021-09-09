@@ -4,7 +4,7 @@
             [attr.data-bs-target]="'#' + 'banner'  + project.id">
             {{project.name}}
             <span class="ms-5 badge bg-primary">{{project.fields[0].name}}</span>
-            <span class="ms-1 badge bg-primary">{{project.fields[0].name}}</span>
+            <span class="ms-1 badge bg-primary" *ngFor="let field of project.fields | slice:1; let i = index;">{{field.name}}</span>
         </button>
     </h2>
     <div class="accordion-collapse collapse" [id]="'banner' + project.id">
