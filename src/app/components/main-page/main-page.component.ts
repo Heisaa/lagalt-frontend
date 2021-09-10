@@ -17,7 +17,6 @@ export class MainPageComponent implements OnInit {
   projects: Project[] = [];
   filteredProjects: Project[] = [];
   searchFilterdProjects: Project[] = [];
-  projectsForLoggedInUser?: Project[];
 
   constructor(
     private readonly fieldService: FieldsService,
@@ -29,12 +28,18 @@ export class MainPageComponent implements OnInit {
   ngOnInit(): void {
     this.getFields();
     this.getProjects();
-    this.getProjectByUser();
   }
 
   filterSearch(search: string) {
     if (search.length > 0) {
-      this.searchFilterdProjects = this.filteredProjects.filter(project => project.name.toLowerCase().indexOf(search.toLowerCase()) >= 0);
+      this.searchFilterdProjects = this.filteredProjects.filter(project => {
+        const matchOnName = project.name.toLowerCase().indexOf(search.toLowerCase()) >= 0;
+        const matchOnKeyword = project.keywords.some(keyword => {
+          console.log(keyword.name.toLowerCase().indexOf(search.toLowerCase()) >= 0)
+          return keyword.name.toLowerCase().indexOf(search.toLowerCase()) >= 0
+        })
+        return matchOnName || matchOnKeyword;
+      });
     } else {
       this.searchFilterdProjects = this.filteredProjects;
     }
@@ -65,19 +70,4 @@ export class MainPageComponent implements OnInit {
         this.searchFilterdProjects = data;
       });
   }
-
-  async getProjectByUser() {
-    const isLoggedIn = await this.keycloak.isLoggedIn();
-    if (isLoggedIn) {
-      const userId = (await this.keycloak.loadUserProfile()).id;
-      if(userId) {
-        this.projectService.getProjectsByUser(userId)
-          .subscribe((data: Project[]) => {
-            this.projectsForLoggedInUser = data;
-            console.log(data)
-          });
-      }
-    }
-  }
-
 }

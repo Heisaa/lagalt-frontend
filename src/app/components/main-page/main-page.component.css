@@ -13,7 +13,6 @@ main {
     background-color: white;
     grid-area: leftSideBar;
     margin-right: 20px;
-    width: 200px;
 }
 
 #rightSide {

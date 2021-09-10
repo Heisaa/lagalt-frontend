@@ -1,12 +1,6 @@
 <main>
-    <div id="leftSide" class="sideBar" *ngIf="projectsForLoggedInUser">
-        <p class="text-secondary ms-3 mt-3">MY PROJECTS</p>
-        <div class="list-group list-group-flush">
-            <button class="list-group-item list-group-item-action" *ngFor="let project of projectsForLoggedInUser">
-                {{project.name}}
-            </button>
-        </div>
-    </div>
+
+    <app-my-projects-main id="leftSide" class="sideBar"></app-my-projects-main>
 
     <app-filter-bar (searchEvent)="filterSearch($event)" [fields]="fields" (fieldFilterEvent)="filterFields($event)"
         id="filterBarContainer"></app-filter-bar>
