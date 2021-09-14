@@ -11,8 +11,8 @@ export class ProjectsService {
 
   constructor(private readonly http: HttpClient) { }
 
-  getProjects() {
-    return this.http.get<Project[]>(this.projectsUrl);
+  getProjects(page: number, limit: number) {
+    return this.http.get<Project[]>(this.projectsUrl + "?_page=" + page + "&_limit=" + limit);
   }
 
   getProjectsByUser(userId: string) {

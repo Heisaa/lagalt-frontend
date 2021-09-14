@@ -17,6 +17,9 @@ export class MainPageComponent implements OnInit {
   projects: Project[] = [];
   filteredProjects: Project[] = [];
   searchFilterdProjects: Project[] = [];
+  currentPage = 1;
+  totalItems = 15;
+  itemsPerPage = 3;
 
   constructor(
     private readonly fieldService: FieldsService,
@@ -27,7 +30,14 @@ export class MainPageComponent implements OnInit {
 
   ngOnInit(): void {
     this.getFields();
-    this.getProjects();
+    this.getProjects(this.currentPage, this.itemsPerPage);
+  }
+
+  pageChanged(event: any) {
+    console.log(event);
+
+    this.currentPage = Number(event)
+    this.getProjects(this.currentPage, this.itemsPerPage);
   }
 
   filterSearch(search: string) {
@@ -62,8 +72,8 @@ export class MainPageComponent implements OnInit {
       });
   }
 
-  getProjects() {
-    this.projectService.getProjects()
+  getProjects(page: number, limit: number) {
+    this.projectService.getProjects(page, limit)
       .subscribe((data: Project[]) => {
         this.projects = data;
         this.filteredProjects = data;

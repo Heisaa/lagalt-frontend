@@ -2,6 +2,8 @@
 
 :root {
     --footer-height: 50px;
+    --left-bar-width: 230px;
+    --right-bar-width: 230px;
 }
 
 .white {

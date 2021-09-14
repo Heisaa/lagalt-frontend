@@ -15,6 +15,7 @@ import { FilterBarComponent } from './components/filter-bar/filter-bar.component
 import { HttpClientModule } from '@angular/common/http';
 import { ProjectBannerComponent } from './components/project-banner/project-banner.component';
 import { MyProjectsMainComponent } from './components/my-projects-main/my-projects-main.component';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 function initializeKeycloak(keycloak: KeycloakService) {
   const AUTH_URL = 'https://keycloak-auth-lagalt.herokuapp.com/auth';
@@ -49,14 +50,15 @@ function initializeKeycloak(keycloak: KeycloakService) {
     HeaderComponent,
     FilterBarComponent,
     ProjectBannerComponent,
-    MyProjectsMainComponent
+    MyProjectsMainComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     KeycloakAngularModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    NgxPaginationModule
   ],
   providers: [
     {

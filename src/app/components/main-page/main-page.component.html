@@ -6,8 +6,13 @@
         id="filterBarContainer"></app-filter-bar>
 
     <div id="projectFeed">
-        <app-project-banner class="accordion" *ngFor="let project of searchFilterdProjects" [project]="project">
+        <app-project-banner class="accordion"
+            *ngFor="let project of searchFilterdProjects | paginate : { itemsPerPage, currentPage, totalItems}"
+            [project]="project">
         </app-project-banner>
+        <div class="d-flex justify-content-center mt-4">
+            <pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>
+        </div>
     </div>
     <div id="rightSide" class="sideBar">
 
