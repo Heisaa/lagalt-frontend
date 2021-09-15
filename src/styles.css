@@ -4,6 +4,14 @@
     --footer-height: 50px;
     --left-bar-width: 230px;
     --right-bar-width: 230px;
+    --blue: #4056A1;
+    --yellow: #D79922;
+    --red: #F13C20;
+    --green: #245b32;
+    --maroon: #7c2f1e;
+    --yellowGreen: #7a6f04;
+    /* --bs-body-font-family: 'M PLUS Rounded 1c', sans-serif; */
+    --bs-primary-rgb: 64,86,161;
 }
 
 .white {

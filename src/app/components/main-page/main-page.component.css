@@ -12,7 +12,9 @@ main {
 #leftSide {
     background-color: white;
     grid-area: leftSideBar;
-    margin-right: 20px;
+    margin-top: 20px;
+    margin-left: 20px;
+    margin-bottom: 20px;
 }
 
 #rightSide {
@@ -22,15 +24,14 @@ main {
 
 #filterBarContainer{
     grid-area: filterBar;
-    margin-right: 20px;
-    margin-top: 20px;
-    margin-bottom: 20px;
+    margin: 20px;
 }
 
 #projectFeed {
     background-color: white;
     grid-area: projectFeed;
     margin-right: 20px;
+    margin-left: 20px;
     margin-bottom: 20px;
 }
 
@@ -41,7 +42,7 @@ main {
                     "filterBar"
                     "projectFeed";
         grid-template-columns: 100%;
-        grid-template-rows: auto auto;
+        grid-template-rows: auto 1fr;
     }
 
     #leftSide {
@@ -50,14 +51,6 @@ main {
 
     #rightSide {
         display: none;
-    }
-
-    #filterBarContainer {
-        margin-right: 0;
-    }
-
-    #projectFeed {
-        margin-right: 0;
     }
     
 }

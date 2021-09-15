@@ -1,17 +1,14 @@
-<header class="bg-dark">
-    <nav class="navbar navbar-expand-lg navbar-dark">
+<header class="white">
+    <nav class="navbar navbar-expand-lg navbar-light">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">Lagalt</a>
-            
-
-
+            <a class="navbar-brand d-flex align-items-center fw-bolder fs-3" href="#">Lagalt <img class="ms-1 headerImg" src="../../../assets/images/logo.png" alt="logo"></a>
             <ul class="navbar-nav" *ngIf="isLoggedIn else loginButton">
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button"
                         data-bs-toggle="dropdown" aria-expanded="false" *ngIf="userProfile">
                         {{userProfile.username}}
                     </a>
-                    <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-end"
+                    <ul class="dropdown-menu  dropdown-menu-end"
                         aria-labelledby="navbarDarkDropdownMenuLink">
                         <li><button class="dropdown-item" (click)="gotoProfile()">Profile</button></li>
                         <li><button class="dropdown-item" (click)="logOut()">Log Out</button></li>

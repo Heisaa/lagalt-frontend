@@ -1,0 +1,8 @@
+header {
+    border-bottom: var(--blue) solid 4px;
+    box-sizing: border-box;
+}
+
+.headerImg {
+    width: 35px;
+}

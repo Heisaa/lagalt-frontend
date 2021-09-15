@@ -13,13 +13,15 @@ import { ProjectsService } from 'src/app/services/projects.service';
 })
 export class MainPageComponent implements OnInit {
   public userProfile: KeycloakProfile | null = null;
+  public isLoggedIn = false;
   fields: Field[] = [];
   projects: Project[] = [];
   filteredProjects: Project[] = [];
   searchFilterdProjects: Project[] = [];
   currentPage = 1;
-  totalItems = 15;
   itemsPerPage = 3;
+  //Måste få in totalItems från backend
+  totalItems = 15;
 
   constructor(
     private readonly fieldService: FieldsService,
@@ -28,14 +30,19 @@ export class MainPageComponent implements OnInit {
   ) { }
 
 
-  ngOnInit(): void {
+  async ngOnInit() {
     this.getFields();
+    // Get paginated projects
     this.getProjects(this.currentPage, this.itemsPerPage);
+    this.isLoggedIn = await this.keycloak.isLoggedIn();
+
+    if (this.isLoggedIn) {
+      this.userProfile = await this.keycloak.loadUserProfile();
+    }
   }
 
   pageChanged(event: any) {
-    console.log(event);
-
+    // Get a new page based on selection in frontend
     this.currentPage = Number(event)
     this.getProjects(this.currentPage, this.itemsPerPage);
   }

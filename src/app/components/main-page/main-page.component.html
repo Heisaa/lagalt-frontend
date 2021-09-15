@@ -1,6 +1,6 @@
 <main>
 
-    <app-my-projects-main id="leftSide" class="sideBar"></app-my-projects-main>
+    <app-my-projects-main id="leftSide" class="sideBar" *ngIf="isLoggedIn"></app-my-projects-main>
 
     <app-filter-bar (searchEvent)="filterSearch($event)" [fields]="fields" (fieldFilterEvent)="filterFields($event)"
         id="filterBarContainer"></app-filter-bar>
