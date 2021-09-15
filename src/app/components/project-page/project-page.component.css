@@ -1,0 +1,31 @@
+main {
+    display: grid;
+    grid-template-areas: "projectImage projectName projectName"
+                         "projectImage description description"
+                         "messageBoard messageBoard links"
+                         "messageBoard messageBoard members";
+}
+
+.projectImage {
+    grid-area: projectImage;
+}
+
+.projectName {
+    grid-area: projectName;
+}
+
+.description {
+    grid-area: description;
+}
+
+.messageBoard {
+    grid-area: messageBoard;
+}
+
+.links {
+    grid-area: links;
+}
+
+.members {
+    grid-area: members;
+}
