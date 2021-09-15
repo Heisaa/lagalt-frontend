@@ -34,6 +34,5 @@ export class ProfilePageComponent implements OnInit {
     this.keycloak.logout();
   }
 
-  
-
+ 
 }
