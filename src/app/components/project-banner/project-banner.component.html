@@ -2,7 +2,7 @@
     <h2 class="accordion-header">
         <div class="accordionContainer">
             <div>
-                <a class="text-decoration-none text-dark px-3" href="">{{project.name}}</a>
+                <a class="text-decoration-none text-dark px-3 projectLink" (click)="gotoProject(project.id)">{{project.name}}</a>
                 <span class="ms-1 badge bg-primary"
                     *ngFor="let field of project.fields">{{field.name}}</span>
             </div>
