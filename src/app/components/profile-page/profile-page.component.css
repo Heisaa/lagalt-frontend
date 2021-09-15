@@ -1,0 +1,85 @@
+
+
+main {
+    width: 100%;
+    min-height: 100%;
+    display: grid;
+    grid-template-areas: 
+                    "profileDivContainer rightUpperContainer"
+                    "projectContainer rightLowerContainer"
+                    "portfolioContainer rightLowerContainer";
+
+    grid-template-columns: auto 250px;
+    grid-template-rows: 0.5fr auto 1fr;
+    gap: 20px;
+    box-sizing: border-box; 
+    
+}
+
+.projectContainer {
+    background-color: lightgray;
+    grid-area: projectContainer;
+}
+
+.portfolioContainer {
+    background-color: lightgray;
+    grid-area: portfolioContainer;
+}
+
+.rightUpperContainer {
+    background-color: lightgray;
+    grid-area: rightUpperContainer;
+}
+
+.rightLowerContainer {
+    background-color: lightgray;
+    grid-area: rightLowerContainer;
+}
+
+.profileDivContainer {
+    background-color: lightgray;
+    grid-area: profileDivContainer;
+    display: grid;
+    grid-template-areas: 
+                    "profilePicture usernameTitle"
+                    "profilePicture profileDescription";
+    grid-template-columns: 250px auto;
+    grid-template-rows: 80px auto;
+    box-sizing: border-box;
+}
+
+#profilePicture {
+    background-color: darkgrey;
+    max-width: 250px;
+    max-height: 250px;
+    grid-area: profilePicture;
+}
+
+#usernameTitle {
+    background-color: darkgrey;
+    grid-area: usernameTitle;
+}
+
+#profileDescription {
+    background-color: darkgrey;
+    grid-area: profileDescription;
+}
+
+
+
+@media screen and (max-width: 1000px) {
+    main {
+        grid-template-areas: 
+                    "profileDivContainer"
+                    "rightUpperContainer"
+                    "projectContainer"
+                    "portfolioContainer"
+                    "rightLowerContainer";
+        grid-template-columns: 100%;
+       
+    }
+
+    .btn-group {
+        width: 100%;
+    }
+}
