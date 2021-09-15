@@ -1,18 +1,24 @@
-<header class="container">
-    <nav class="navbar navbar-dark bg-dark text-light">
-        <a class="navbar-brand" href="#">Navbar</a>
-        <button (click)="logIn()" class="btn btn-light">Log In</button>
-        <div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-              Dropdown button
-            </button>
-            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-              <li><a class="dropdown-item" href="#">Action</a></li>
-              <li><a class="dropdown-item" href="#">Another action</a></li>
-              <li><a class="dropdown-item" href="#">Something else here</a></li>
+<header class="white">
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container-fluid">
+            <a class="navbar-brand d-flex align-items-center fw-bolder fs-3" href="#">Lagalt <img class="ms-1 headerImg" src="../../../assets/images/logo.png" alt="logo"></a>
+            <ul class="navbar-nav" *ngIf="isLoggedIn else loginButton">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button"
+                        data-bs-toggle="dropdown" aria-expanded="false" *ngIf="userProfile">
+                        {{userProfile.username}}
+                    </a>
+                    <ul class="dropdown-menu  dropdown-menu-end"
+                        aria-labelledby="navbarDarkDropdownMenuLink">
+                        <li><button class="dropdown-item" (click)="gotoProfile()">Profile</button></li>
+                        <li><button class="dropdown-item" (click)="logOut()">Log Out</button></li>
+                    </ul>
+                </li>
             </ul>
-          </div>
-        
-        <button (click)="logOut()">logout</button>
+
+            <ng-template #loginButton>
+                <button (click)="logIn()" class="btn btn-light">Log In</button>
+            </ng-template>
+        </div>
     </nav>
 </header>

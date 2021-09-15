@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { KeycloakService } from 'keycloak-angular';
+import { KeycloakProfile } from 'keycloak-js';
 import { Field } from 'src/app/models/field.model';
 import { Project } from 'src/app/models/project.model';
 import { FieldsService } from 'src/app/services/fields.service';
@@ -11,22 +12,64 @@ import { ProjectsService } from 'src/app/services/projects.service';
   styleUrls: ['./main-page.component.css']
 })
 export class MainPageComponent implements OnInit {
+  public userProfile: KeycloakProfile | null = null;
+  public isLoggedIn = false;
   fields: Field[] = [];
   projects: Project[] = [];
+  filteredProjects: Project[] = [];
+  searchFilterdProjects: Project[] = [];
+  currentPage = 1;
+  itemsPerPage = 3;
+  //Måste få in totalItems från backend
+  totalItems = 15;
 
   constructor(
-    private readonly fieldService: FieldsService, 
-    private readonly projectService: ProjectsService
-    ) { }
+    private readonly fieldService: FieldsService,
+    private readonly projectService: ProjectsService,
+    private readonly keycloak: KeycloakService
+  ) { }
 
-    
-  ngOnInit(): void {
+
+  async ngOnInit() {
     this.getFields();
-    this.getProjects();
+    // Get paginated projects
+    this.getProjects(this.currentPage, this.itemsPerPage);
+    this.isLoggedIn = await this.keycloak.isLoggedIn();
+
+    if (this.isLoggedIn) {
+      this.userProfile = await this.keycloak.loadUserProfile();
+    }
   }
 
+  pageChanged(event: any) {
+    // Get a new page based on selection in frontend
+    this.currentPage = Number(event)
+    this.getProjects(this.currentPage, this.itemsPerPage);
+  }
+
+  filterSearch(search: string) {
+    if (search.length > 0) {
+      this.searchFilterdProjects = this.filteredProjects.filter(project => {
+        const matchOnName = project.name.toLowerCase().indexOf(search.toLowerCase()) >= 0;
+        const matchOnKeyword = project.keywords.some(keyword => {
+          console.log(keyword.name.toLowerCase().indexOf(search.toLowerCase()) >= 0)
+          return keyword.name.toLowerCase().indexOf(search.toLowerCase()) >= 0
+        })
+        return matchOnName || matchOnKeyword;
+      });
+    } else {
+      this.searchFilterdProjects = this.filteredProjects;
+    }
+  }
+
+  // Filter projects according to the selected field in the filterbar
   filterFields(fieldId: number | null) {
-    console.log(fieldId);
+    if (fieldId != null) {
+      this.filteredProjects = this.projects.filter(project => project.fields.some(field => field.id === fieldId))
+    } else {
+      this.filteredProjects = this.projects;
+    }
+    this.searchFilterdProjects = this.filteredProjects;
   }
 
   getFields() {
@@ -36,11 +79,12 @@ export class MainPageComponent implements OnInit {
       });
   }
 
-  getProjects() {
-    this.projectService.getProjects()
+  getProjects(page: number, limit: number) {
+    this.projectService.getProjects(page, limit)
       .subscribe((data: Project[]) => {
         this.projects = data;
+        this.filteredProjects = data;
+        this.searchFilterdProjects = data;
       });
   }
-
 }

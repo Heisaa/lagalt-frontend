@@ -1,12 +1,18 @@
-<main class="container">
-    <div id="leftSide" class="sideBar">
-        
-    </div>
+<main>
 
-    <app-filter-bar [fields]="fields" (fieldFilterEvent)="filterFields($event)" id="filterBarContainer"></app-filter-bar>
+    <app-my-projects-main id="leftSide" class="sideBar" *ngIf="isLoggedIn"></app-my-projects-main>
+
+    <app-filter-bar (searchEvent)="filterSearch($event)" [fields]="fields" (fieldFilterEvent)="filterFields($event)"
+        id="filterBarContainer"></app-filter-bar>
 
     <div id="projectFeed">
-        <app-project-banner class="accordion" *ngFor="let project of projects" [project]="project"></app-project-banner>
+        <app-project-banner class="accordion"
+            *ngFor="let project of searchFilterdProjects | paginate : { itemsPerPage, currentPage, totalItems}"
+            [project]="project">
+        </app-project-banner>
+        <div class="d-flex justify-content-center mt-4">
+            <pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>
+        </div>
     </div>
     <div id="rightSide" class="sideBar">
 

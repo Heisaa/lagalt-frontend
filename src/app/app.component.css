@@ -3,10 +3,5 @@
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: auto 0px 1fr var(--footer-height);
-}
-
-footer {
-    height: var(--footer-height);
-    border: black solid 4px;
-    box-sizing: border-box;
+    background-color: #f8f9fa;
 }

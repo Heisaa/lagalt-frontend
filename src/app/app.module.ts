@@ -1,5 +1,8 @@
 import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule } from '@angular/forms';
+
+import { environment } from '../environments/environment';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -10,27 +13,31 @@ import { KeycloakAngularModule, KeycloakService } from 'keycloak-angular';
 import { HeaderComponent } from './components/header/header.component';
 import { FilterBarComponent } from './components/filter-bar/filter-bar.component';
 import { HttpClientModule } from '@angular/common/http';
-import { FilterFieldsPipe } from './pipes/filter-fields.pipe';
 import { ProjectBannerComponent } from './components/project-banner/project-banner.component';
+import { MyProjectsMainComponent } from './components/my-projects-main/my-projects-main.component';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 function initializeKeycloak(keycloak: KeycloakService) {
+  const AUTH_URL = 'https://keycloak-auth-lagalt.herokuapp.com/auth';
+  
   return () =>
     keycloak.init({
       config: {
-        url: 'https://keycloak-auth-lagalt.herokuapp.com/auth',
+        url: AUTH_URL,
         realm: 'lagalt',
-        clientId: 'lagalt',
+        clientId: 'lagaltAPI',
       },
       initOptions: {
         checkLoginIframe: true,
-        checkLoginIframeInterval: 25
+        checkLoginIframeInterval: 25,
 
-        // onLoad: 'check-sso',
-        // silentCheckSsoRedirectUri:
-        //   window.location.origin + '/assets/silent-check-sso.html',
+        onLoad: 'check-sso',
+        silentCheckSsoRedirectUri:
+          window.location.origin + '/assets/silent-check-sso.html',
+       
       },
-      enableBearerInterceptor: true,
-      bearerPrefix: 'Bearer',
+      // enableBearerInterceptor: true,
+      // bearerPrefix: 'Bearer',
     });
 }
 
@@ -42,14 +49,16 @@ function initializeKeycloak(keycloak: KeycloakService) {
     ProjectPageComponent,
     HeaderComponent,
     FilterBarComponent,
-    FilterFieldsPipe,
-    ProjectBannerComponent
+    ProjectBannerComponent,
+    MyProjectsMainComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     KeycloakAngularModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule,
+    NgxPaginationModule
   ],
   providers: [
     {

@@ -1,0 +1,13 @@
+.leftSide {
+    width: var(--left-bar-width);
+    height: 570px;
+    overflow: auto;
+}
+
+.header {
+    background-color: var(--blue);
+}
+ 
+p {
+    margin: 0;
+}

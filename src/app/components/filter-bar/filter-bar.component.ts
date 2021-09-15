@@ -10,7 +10,8 @@ import { Output, EventEmitter } from '@angular/core';
 export class FilterBarComponent implements OnInit {
   @Input() fields: Field[] = [];
   @Output() fieldFilterEvent = new EventEmitter<number | null>();
-  searchWord: any = null;
+  @Output() searchEvent = new EventEmitter<string>();
+  searchWord = "";
   
   constructor() { }
 
@@ -18,8 +19,12 @@ export class FilterBarComponent implements OnInit {
     if (event.target.value === "all") {
       this.fieldFilterEvent.emit(null);
     } else {
-      this.fieldFilterEvent.emit(event.target.value);
+      this.fieldFilterEvent.emit(Number(event.target.value));
     }
+  }
+
+  searchChange(search: string) {
+    this.searchEvent.emit(search);
   }
 
   ngOnInit(): void {
