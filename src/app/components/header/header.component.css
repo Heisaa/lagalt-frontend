@@ -6,3 +6,7 @@ header {
 .headerImg {
     width: 35px;
 }
+
+.headerLogo {
+    cursor: pointer;
+}

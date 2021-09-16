@@ -19,7 +19,7 @@ export class ProjectPageComponent implements OnInit {
 
   ngOnInit(): void {
     this.projectIdFromUrl = Number(this.route.snapshot.paramMap.get("id"));
-
+    this.getProject(this.projectIdFromUrl);
   }
 
   getProject(id: number) {

@@ -1,7 +1,7 @@
 import { Field } from "./field.model";
 
 export interface Project {
-    id: number;
+    projectId: number;
     keywords: Keyword[];
     projectName: string;
     fields: Field[];

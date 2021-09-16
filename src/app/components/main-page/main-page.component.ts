@@ -65,7 +65,7 @@ export class MainPageComponent implements OnInit {
   // Filter projects according to the selected field in the filterbar
   filterFields(fieldId: number | null) {
     if (fieldId != null) {
-      this.filteredProjects = this.projects.filter(project => project.fields.some(field => field.id === fieldId))
+      this.filteredProjects = this.projects.filter(project => project.fields.some(field => field.fieldId === fieldId))
     } else {
       this.filteredProjects = this.projects;
     }

@@ -1,7 +1,7 @@
 <header class="white">
     <nav class="navbar navbar-expand-lg navbar-light">
         <div class="container-fluid">
-            <a class="navbar-brand d-flex align-items-center fw-bolder fs-3" href="#">Lagalt <img class="ms-1 headerImg" src="../../../assets/images/logo.png" alt="logo"></a>
+            <a class="navbar-brand d-flex align-items-center fw-bolder fs-3 headerLogo" (click)="gotoMainPage()">Lagalt <img class="ms-1 headerImg" src="../../../assets/images/logo.png" alt="logo"></a>
             <ul class="navbar-nav" *ngIf="isLoggedIn else loginButton">
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button"
