@@ -7,18 +7,19 @@ import { Project, ProjectPage } from '../models/project.model';
   providedIn: 'root'
 })
 export class ProjectsService {
-  private projectsUrl = environment.apiUrl + "projects/";
+  private projectsUrl = environment.apiUrl + "projects";
   private testUrl = "http://localhost:3000/projects/"
   private projectsByUserUrl = "http://localhost:3000/users/";
 
   constructor(private readonly http: HttpClient) { }
 
   getProjects(page: number, size: number) {
+    console.log(this.projectsUrl);
     return this.http.get<ProjectPage>(this.projectsUrl + "?PageNumber=" + page + "&PageSize=" + size);
   }
 
   getProject(id: number) {
-    return this.http.get<Project>(this.projectsUrl + id + "/project")
+    return this.http.get<Project>(this.projectsUrl + "/" + id + "/project")
   }
 
   getProjectsByUser(userId: string) {
