@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { Project } from 'src/app/models/project.model';
 import { ProjectsService } from 'src/app/services/projects.service';
 
@@ -10,21 +10,25 @@ import { ProjectsService } from 'src/app/services/projects.service';
 })
 export class ProjectPageComponent implements OnInit {
   projectIdFromUrl: number | undefined;
-  project: Project | undefined;
+  project?: Project;
 
-  constructor(private route: ActivatedRoute, private readonly projectService: ProjectsService) { }
+  constructor(
+    private route: ActivatedRoute, 
+    private readonly projectService: ProjectsService,
+    ) {}
 
   ngOnInit(): void {
     this.projectIdFromUrl = Number(this.route.snapshot.paramMap.get("id"));
-    console.log(this.projectIdFromUrl);
     this.getProject(this.projectIdFromUrl);
-    
   }
 
   getProject(id: number) {
     this.projectService.getProject(id)
       .subscribe((data: Project) => {
         this.project = data;
+        console.log("anrop");
+        
+        console.log(data)
       });
   }
 

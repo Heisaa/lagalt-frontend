@@ -6,7 +6,7 @@ import { Field } from '../models/field.model';
   providedIn: 'root'
 })
 export class FieldsService {
-  private fieldsUrl = "http://localhost:3000/fields";
+  private fieldsUrl = "api/Fields";
 
   constructor(private readonly http: HttpClient) { }
 

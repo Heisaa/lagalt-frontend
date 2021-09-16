@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { KeycloakService } from 'keycloak-angular';
 import { KeycloakProfile } from 'keycloak-js';
 import { Field } from 'src/app/models/field.model';
-import { Project } from 'src/app/models/project.model';
+import { Project, ProjectPage } from 'src/app/models/project.model';
 import { FieldsService } from 'src/app/services/fields.service';
 import { ProjectsService } from 'src/app/services/projects.service';
 
@@ -19,9 +19,9 @@ export class MainPageComponent implements OnInit {
   filteredProjects: Project[] = [];
   searchFilterdProjects: Project[] = [];
   currentPage = 1;
-  itemsPerPage = 3;
+  itemsPerPage = 4;
   //Måste få in totalItems från backend
-  totalItems = 15;
+  totalItems = 0;
 
   constructor(
     private readonly fieldService: FieldsService,
@@ -50,7 +50,7 @@ export class MainPageComponent implements OnInit {
   filterSearch(search: string) {
     if (search.length > 0) {
       this.searchFilterdProjects = this.filteredProjects.filter(project => {
-        const matchOnName = project.name.toLowerCase().indexOf(search.toLowerCase()) >= 0;
+        const matchOnName = project.projectName.toLowerCase().indexOf(search.toLowerCase()) >= 0;
         const matchOnKeyword = project.keywords.some(keyword => {
           console.log(keyword.name.toLowerCase().indexOf(search.toLowerCase()) >= 0)
           return keyword.name.toLowerCase().indexOf(search.toLowerCase()) >= 0
@@ -65,7 +65,7 @@ export class MainPageComponent implements OnInit {
   // Filter projects according to the selected field in the filterbar
   filterFields(fieldId: number | null) {
     if (fieldId != null) {
-      this.filteredProjects = this.projects.filter(project => project.fields.some(field => field.id === fieldId))
+      this.filteredProjects = this.projects.filter(project => project.fields.some(field => field.fieldId === fieldId))
     } else {
       this.filteredProjects = this.projects;
     }
@@ -81,10 +81,14 @@ export class MainPageComponent implements OnInit {
 
   getProjects(page: number, limit: number) {
     this.projectService.getProjects(page, limit)
-      .subscribe((data: Project[]) => {
-        this.projects = data;
-        this.filteredProjects = data;
-        this.searchFilterdProjects = data;
+      .subscribe((data: ProjectPage) => {
+        this.projects = data.projects;
+        this.filteredProjects = data.projects;
+        this.searchFilterdProjects = data.projects;
+
+        this.currentPage = data.pageNumber;
+        this.totalItems = data.count;
+        this.itemsPerPage = data.pageSize;
       });
   }
 }
