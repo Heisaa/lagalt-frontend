@@ -4,7 +4,7 @@
             <div>
                 <a class="text-decoration-none text-dark px-3 projectLink" (click)="gotoProject(project.projectId)">{{project.projectName}}</a>
                 <span class="ms-1 badge bg-primary"
-                    *ngFor="let field of project.fields">{{field.name}}</span>
+                    *ngFor="let field of project.fields">{{field.fieldName}}</span>
             </div>
             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                 [attr.data-bs-target]="'#' + 'banner'  + project.projectId">
