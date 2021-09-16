@@ -72,8 +72,7 @@
           },
           "configurations": {
             "production": {
-              "browserTarget": "lagalt-frontend:build:production",
-              "proxyConfig": "./proxy.conf.json"
+              "browserTarget": "lagalt-frontend:build:production"
             },
             "development": {
               "browserTarget": "lagalt-frontend:build:development"
