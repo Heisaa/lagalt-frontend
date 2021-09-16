@@ -8,6 +8,7 @@ main {
 
 .projectImage {
     grid-area: projectImage;
+    max-width: 200px;
 }
 
 .projectName {

@@ -19,3 +19,7 @@ export interface ProjectPage {
     pageSize: number;
     projects: Project[];
 }
+
+export interface ProjectObject {
+    projects: Project[];
+}
