@@ -5,6 +5,7 @@ export interface Project {
     keywords: Keyword[];
     projectName: string;
     fields: Field[];
+    photos: string[];
 } 
 
 interface Keyword {
