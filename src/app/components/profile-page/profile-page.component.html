@@ -1,23 +1,23 @@
 <main class="profilePageContainer text-break container">
   <ng-container *ngIf="userProfile">
     <div class="profileDivContainer">
-      <img class="m-2" id="profilePicture" src="https://www.pngarts.com/files/10/Default-Profile-Picture-PNG-High-Quality-Image.png" alt="">
+      <img class="m-2" id="profilePicture"
+        src="https://www.pngarts.com/files/10/Default-Profile-Picture-PNG-High-Quality-Image.png" alt="">
 
       <h1 class="m-2" id="usernameTitle" *ngIf="userProfile.username">{{userProfile.username}}</h1>
+      <div class="userNames m-1">
+        <h4 class="m-1" id="userFirstName" *ngIf="userProfile.firstName">{{userProfile.firstName}}</h4>
+        <h4 class="m-1" id="userLastName" *ngIf="userProfile.lastName">{{userProfile.lastName}}</h4>
+      </div>
+        <p *ngIf="userProfile?.id">{{userProfile?.id}}</p>
+        <p class="m-2" id="profileDescription" *ngIf="userDetails?.description">{{userDetails?.description}}</p>
 
-      <p class="m-2" id="profileDescription">
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-        magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-        pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est
-        laborum."
-      </p>
     </div>
     <div class="rightUpperContainer d-flex justify-content-end align-items-start">
       <div class="btn-group m-2" role="group" aria-label="Basic radio toggle button group">
         <input type="radio" class="btn-check " name="btnradio" id="btnradio1" autocomplete="off" checked>
         <label class="btn btn-outline-success" for="btnradio1">Regular</label>
-      
+
         <input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off">
         <label class="btn btn-outline-danger" for="btnradio2">Hidden</label>
       </div>
@@ -63,16 +63,16 @@
 
     <div class="rightLowerContainer">
       <!--<ng-container *ngIf="user.skills">-->
-        <ul class="skillList list-group list-group-flush">
-          <li class="list-group-item">An item</li>
-          <li class="list-group-item">A second item</li>
-          <li class="list-group-item">A third item</li>
-          <li class="list-group-item">A fourth item</li>
-          <li class="list-group-item">And a fifth one</li>
-        </ul>
+      <ul class="skillList list-group list-group-flush">
+        <li class="list-group-item">An item</li>
+        <li class="list-group-item">A second item</li>
+        <li class="list-group-item">A third item</li>
+        <li class="list-group-item">A fourth item</li>
+        <li class="list-group-item">And a fifth one</li>
+      </ul>
 
       <!--</ng-container>-->
-      
+
     </div>
   </ng-container>
 </main>

@@ -1,6 +1,6 @@
 export interface User {
-    id: number;
-    name: String;
+    userId: string;
+    userName: String;
     profilePhoto?: string;
     description?: string;
     hidden: boolean;
