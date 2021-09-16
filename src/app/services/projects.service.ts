@@ -1,12 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { environment } from 'src/environments/environment';
 import { Project, ProjectPage } from '../models/project.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProjectsService {
-  private projectsUrl = "api/projects/";
+  private projectsUrl = environment.apiUrl + "projects/";
   private testUrl = "http://localhost:3000/projects/"
   private projectsByUserUrl = "http://localhost:3000/users/";
 
