@@ -4,7 +4,7 @@
         <select class="form-select fieldForm" (change)="onFieldChange($event)">
             <option value="" disabled selected>Select a field</option>
             <option value="all">View All</option>
-            <option [value]="field.id" *ngFor="let field of fields">{{field.name}}</option>
+            <option [value]="field.fieldId" *ngFor="let field of fields">{{field.fieldName}}</option>
         </select>
     </div>
 </nav>

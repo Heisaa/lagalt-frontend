@@ -6,10 +6,7 @@ import { ProjectPageComponent } from './components/project-page/project-page.com
 import { AuthGuard } from './auth/auth.guard';
 
 const routes: Routes = [
-  {
-    path: "",
-    component: MainPageComponent,
-  },
+  
   {
     path: "profile/:id",
     component: ProfilePageComponent,
@@ -20,10 +17,15 @@ const routes: Routes = [
     component: ProjectPageComponent,
   },
   {
-    path: "**",
-    redirectTo: "",
+    path: "",
     component: MainPageComponent,
-  }
+    pathMatch: 'full'
+  },
+  // {
+  //   path: "**",
+  //   redirectTo: "",
+  //   component: MainPageComponent,
+  // }
 ];
 
 @NgModule({

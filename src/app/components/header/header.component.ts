@@ -28,6 +28,10 @@ export class HeaderComponent implements OnInit {
     }
   }
 
+  gotoMainPage() {
+    this.router.navigateByUrl("/");
+  }
+
   logOut() {
     this.keycloak.logout();
   }
