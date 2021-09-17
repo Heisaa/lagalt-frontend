@@ -1,0 +1,28 @@
+<div class="projectItem accordion-item" *ngIf="project">
+    <h2 class="accordion-header">
+        <div class="accordionContainer">
+            <div>
+                <a class="text-decoration-none text-dark px-3 projectLink" (click)="goToProject(project.projectId)">{{project.projectName}}</a>
+                <span class="ms-1 badge bg-primary"
+                    *ngFor="let field of project.fields">{{field.fieldName}}</span>
+            </div>
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                [attr.data-bs-target]="'#' + 'banner'  + project.projectId">
+                <span class="me-2">Read more</span>
+                
+            </button>
+        </div>
+    </h2>
+    <div class="accordion-collapse collapse" [id]="'banner' + project.projectId">
+        <div class="accordion-body">
+            <ul>
+                <!--<li>
+                    {{description}}
+                </li>-->
+                <li *ngFor="let keyword of project.keywords">
+                    {{keyword.name}}
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
