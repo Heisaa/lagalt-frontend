@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { KeycloakService } from 'keycloak-angular';
-import { Project } from 'src/app/models/project.model';
+import { Project, ProjectObject } from 'src/app/models/project.model';
 import { ProjectsService } from 'src/app/services/projects.service';
 
 @Component({
@@ -32,8 +32,8 @@ export class MyProjectsMainComponent implements OnInit {
       const userId = (await this.keycloak.loadUserProfile()).id;
       if(userId) {
         this.projectService.getProjectsByUser(userId)
-          .subscribe((data: Project[]) => {
-            this.projectsForLoggedInUser = data;
+          .subscribe((data: ProjectObject) => {
+            this.projectsForLoggedInUser = data.projects;
           });
       }
     }
