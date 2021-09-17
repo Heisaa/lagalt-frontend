@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { KeycloakService } from 'keycloak-angular';
 import { KeycloakProfile } from 'keycloak-js';
 import { Project } from 'src/app/models/project.model';
-import { User } from 'src/app/models/user.model';
+import { Skill, User } from 'src/app/models/user.model';
 import { ProjectsService } from 'src/app/services/projects.service';
 import { UserService } from 'src/app/services/user.service';
 
@@ -19,6 +19,7 @@ export class ProfilePageComponent implements OnInit {
   public userDetails: User | undefined;
   public userId: string = "";
   projects: Project[] = [];
+  skills: Skill[] = [];
 
   constructor(private readonly keycloak: KeycloakService, public readonly userService: UserService, private readonly projectsService: ProjectsService) { }
 
@@ -29,30 +30,31 @@ export class ProfilePageComponent implements OnInit {
       this.userProfile = await this.keycloak.loadUserProfile();
       if (this.userProfile.id != undefined) {
         this.getUser(this.userProfile.id);
+        this.getProjects(this.userProfile.id);
       }
     }
     
     this.keycloak.getToken()
     .then(token=>this.token=token);
 
-    this.getProjects();
   }
 
   getUser(id: string) {
     this.userService.getUserById(id)
       .subscribe((data: User) => {
         this.userDetails = data;
+        this.skills = data.skills;
       });
   }
 
-  getProjects() {
-    this.projectsService.getProjectsByUser(this.userId)
+  getProjects(id: string) {
+    this.projectsService.getProjectsByUser(id)
       .subscribe((data: Project[]) =>
       {
         this.projects = data;
-        /*data.forEach(element => {
-          console.log(element.projectName + element.projectId)
-        });*/
+        data.forEach(element => {
+          console.log("TEST" + element.projectName + element.projectId)
+        });
       })
   }
 
