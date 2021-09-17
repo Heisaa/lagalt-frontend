@@ -26,9 +26,7 @@ export class ProjectPageComponent implements OnInit {
     this.projectService.getProject(id)
       .subscribe((data: Project) => {
         this.project = data;
-        console.log("anrop");
-        
-        console.log(data)
+        console.log(data.photos)
       });
   }
 

@@ -1,8 +1,11 @@
-<div *ngIf="projectsForLoggedInUser" class="leftSide">
+<div class="leftSide">
     <p class="text-light p-3 header">MY PROJECTS</p>
-    <div class="list-group list-group-flush">
+    <div class="list-group list-group-flush" *ngIf="projectsForLoggedInUser; else noProjects">
         <button class="list-group-item list-group-item-action" *ngFor="let project of projectsForLoggedInUser" (click)="gotoProject(project.projectId)">
             {{project.projectName}}
         </button>
     </div>
+    <ng-template #noProjects>
+       <p class="p-2">Join a project and they will show up here!</p>
+    </ng-template>
 </div>
