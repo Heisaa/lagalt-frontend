@@ -5,6 +5,7 @@ export interface Project {
     keywords: Keyword[];
     projectName: string;
     fields: Field[];
+    description: string;
     photos: string[];
 } 
 
@@ -17,5 +18,9 @@ export interface ProjectPage {
     count: number;
     pageNumber: number;
     pageSize: number;
+    projects: Project[];
+}
+
+export interface ProjectObject {
     projects: Project[];
 }
