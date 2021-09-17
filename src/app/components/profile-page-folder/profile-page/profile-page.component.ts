@@ -2,7 +2,7 @@ import { unescapeIdentifier } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { KeycloakService } from 'keycloak-angular';
 import { KeycloakProfile } from 'keycloak-js';
-import { Project } from 'src/app/models/project.model';
+import { Project, ProjectObject } from 'src/app/models/project.model';
 import { User } from 'src/app/models/user.model';
 import { ProjectsService } from 'src/app/services/projects.service';
 import { UserService } from 'src/app/services/user.service';
@@ -47,12 +47,12 @@ export class ProfilePageComponent implements OnInit {
 
   getProjects() {
     this.projectsService.getProjectsByUser(this.userId)
-      .subscribe((data: Project[]) =>
+      .subscribe((data: ProjectObject) =>
       {
-        this.projects = data
-        data.forEach(element => {
+        this.projects = data.projects;
+        /*data.forEach(element => {
           console.log(element.projectName + element.projectId)
-        });
+        });*/
       })
   }
 
