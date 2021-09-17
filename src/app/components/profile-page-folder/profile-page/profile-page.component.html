@@ -59,7 +59,7 @@
       </app-project-item>
     </div>
     <div class="portfolioContainer">
-      <app-portfolio-list-item class="portfolioListItem">
+      <app-portfolio-list-item class="portfolioListItem" >
 
       </app-portfolio-list-item>
     </div>
@@ -67,11 +67,7 @@
     <div class="rightLowerContainer">
       <!--<ng-container *ngIf="user.skills">-->
       <ul class="skillList list-group list-group-flush">
-        <li class="list-group-item">An item</li>
-        <li class="list-group-item">A second item</li>
-        <li class="list-group-item">A third item</li>
-        <li class="list-group-item">A fourth item</li>
-        <li class="list-group-item">And a fifth one</li>
+        <li class="list-group-item" *ngFor="let skill of userDetails?.skills; let i = index">{{i + 1}} {{skill}}</li>
       </ul>
 
       <!--</ng-container>-->

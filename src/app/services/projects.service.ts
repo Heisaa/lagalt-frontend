@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { Project, ProjectPage } from '../models/project.model';
+import { Message, Project, ProjectPage } from '../models/project.model';
 
 @Injectable({
   providedIn: 'root'
@@ -23,5 +23,9 @@ export class ProjectsService {
 
   getProjectsByUser(userId: string) {
     return this.http.get<Project[]>(this.projectsByUserUrl + userId);
+  }
+
+  getMessages(projectId: number) {
+    return this.http.get<Message[]>(this.projectsUrl + "/" + projectId + "/messages")
   }
 }
