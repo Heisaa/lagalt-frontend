@@ -20,3 +20,11 @@ export interface ProjectPage {
     pageSize: number;
     projects: Project[];
 }
+
+export interface Message {
+    messageId: number;
+    projectId: number;
+    userId: string;
+    text: string;
+    timeStamp: string;
+}

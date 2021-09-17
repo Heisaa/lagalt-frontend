@@ -12,7 +12,7 @@
             anim id est laborum.
         </p>
     </div>
-    <div class="messageBoard white"></div>
+    <app-message-board class="messageBoard" *ngIf="project" [project]="project"></app-message-board>
     <div class="links white"></div>
     <div class="members white"></div>
 </main>
