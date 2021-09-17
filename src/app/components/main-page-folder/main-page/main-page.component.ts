@@ -19,7 +19,7 @@ export class MainPageComponent implements OnInit {
   filteredProjects: Project[] = [];
   searchFilterdProjects: Project[] = [];
   currentPage = 1;
-  itemsPerPage = 4;
+  itemsPerPage = 10;
   //Måste få in totalItems från backend
   totalItems = 0;
 

@@ -28,3 +28,10 @@ export interface Message {
     text: string;
     timeStamp: string;
 }
+
+export interface PostMessage {
+    projectId: number;
+    userId: string;
+    text: string;
+    timeStamp: string;
+}

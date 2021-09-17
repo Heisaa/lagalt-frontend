@@ -1,3 +1,8 @@
-<div class="card" *ngIf="message">
-    {{message.text}}
+<div class="card mt-4" *ngIf="message">
+    <div class="card-header">
+        <span *ngIf="user">{{user.userName}}: {{message.timeStamp}}</span>
+    </div>
+    <div class="card-body">
+        {{message.text}}
+    </div>
 </div>
