@@ -9,8 +9,8 @@
         <h4 class="m-1" id="userFirstName" *ngIf="userProfile.firstName">{{userProfile.firstName}}</h4>
         <h4 class="m-1" id="userLastName" *ngIf="userProfile.lastName">{{userProfile.lastName}}</h4>
       </div>
-        <p *ngIf="userProfile?.id">{{userProfile?.id}}</p>
-        <p class="m-2" id="profileDescription" *ngIf="userDetails?.description">{{userDetails?.description}}</p>
+      <p *ngIf="userProfile?.id">{{userProfile?.id}}</p>
+      <p class="m-2" id="profileDescription" *ngIf="userDetails?.description">{{userDetails?.description}}</p>
 
     </div>
     <div class="rightUpperContainer d-flex justify-content-end align-items-start">
@@ -55,10 +55,13 @@
     </ng-container>-->
 
     <div class="projectContainer">
-      <p>profile-page works!</p>
+      <app-project-item class="projectListItem" *ngFor="let project of projects" [project]="project">
+      </app-project-item>
     </div>
     <div class="portfolioContainer">
-      <p>Tja</p>
+      <app-portfolio-list-item class="portfolioListItem">
+
+      </app-portfolio-list-item>
     </div>
 
     <div class="rightLowerContainer">

@@ -1,0 +1,93 @@
+{
+    "users": [
+        {
+            "userId": "9bbf1ceb-a856-45ab-a61e-0c19f0da953d", 
+            "userName": "", 
+            "profilePhoto": "",
+            "description": "", 
+            "hidden": true, 
+            "skills": [
+                {
+
+                }
+            ], 
+            "fields": [
+                {
+                    "id": 1,
+                    "name": "Music"
+                },
+                {
+                    "id": 2,
+                    "name": "Film"
+                }
+            ]
+
+        }
+    ],
+
+    "projects": [
+        {
+            "projectName": "A Project",
+            "projectId": 1,
+            "projectOwners": 1,
+            "users": [
+                "9bbf1ceb-a856-45ab-a61e-0c19f0da953d",
+                1,
+                5
+            ],
+            "fields": [
+                {
+                    "id": 1,
+                    "name": "Music"
+                },
+                {
+                    "id": 2,
+                    "name": "Film"
+                }
+            ],
+            "skillsRequired": [
+                1,
+                2,
+                3
+            ],
+            "keywords": [
+                {
+                    "id": 1,
+                    "name": "Fantasy"
+                }
+            ]
+        },
+        {
+            "projectName": "B Project",
+            "projectId": 2,
+            "projectOwners": 1,
+            "users": [
+                "9bbf1ceb-a856-45ab-a61e-0c19f0da953d",
+                1,
+                5
+            ],
+            "fields": [
+                {
+                    "id": 1,
+                    "name": "Music"
+                },
+                {
+                    "id": 2,
+                    "name": "Film"
+                }
+            ],
+            "skillsRequired": [
+                1,
+                2,
+                3
+            ],
+            "keywords": [
+                {
+                    "id": 1,
+                    "name": "Science-fiction"
+                }
+            ]
+        }
+
+    ]
+}

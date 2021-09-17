@@ -7,7 +7,7 @@ import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MainPageComponent } from './components/main-page-folder/main-page/main-page.component';
-import { ProfilePageComponent } from './components/profile-page/profile-page.component';
+import { ProfilePageComponent } from './components/profile-page-folder/profile-page/profile-page.component';
 import { ProjectPageComponent } from './components/project-page-folder/project-page/project-page.component';
 import { KeycloakAngularModule, KeycloakService } from 'keycloak-angular';
 import { HeaderComponent } from './components/header/header.component';
@@ -17,7 +17,10 @@ import { ProjectBannerComponent } from './components/project-banner/project-bann
 import { MyProjectsMainComponent } from './components/my-projects-main/my-projects-main.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { EditProfilePageComponent } from './components/edit-profile-page/edit-profile-page.component';
+import { ProjectItem } from './components/profile-page-folder/project-item/project-item.component';
+import { PortfolioListItemComponent } from './components/profile-page-folder/portfolio-list-item/portfolio-list-item.component';
 import { PhotoDisplayComponent } from './components/project-page-folder/photo-display/photo-display.component';
+
 
 function initializeKeycloak(keycloak: KeycloakService) {
   const AUTH_URL = 'https://keycloak-auth-lagalt.herokuapp.com/auth';
@@ -54,6 +57,8 @@ function initializeKeycloak(keycloak: KeycloakService) {
     ProjectBannerComponent,
     MyProjectsMainComponent,
     EditProfilePageComponent,
+    ProjectItem,
+    PortfolioListItemComponent,
     PhotoDisplayComponent,
   ],
   imports: [
