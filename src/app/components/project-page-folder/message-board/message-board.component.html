@@ -1,0 +1,4 @@
+<div class="white" *ngIf="project">
+    <h3 class ="pt-4 ps-4">Messages for {{project.projectName}}</h3>
+    <app-message-item *ngFor="let message of messages" [message]="message"></app-message-item>
+</div>
