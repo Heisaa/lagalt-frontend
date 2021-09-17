@@ -1,14 +1,16 @@
 main {
     display: grid;
-    grid-template-areas: "projectImage projectName projectName"
-                         "projectImage description description"
+    grid-template-areas: "projectName projectName projectImage "
+                         "description description projectImage "
                          "messageBoard messageBoard links"
                          "messageBoard messageBoard members";
+    grid-template-columns: auto auto 300px;
+    margin-top: 20px;
 }
 
 .projectImage {
     grid-area: projectImage;
-    max-width: 200px;
+    max-height: 300px;
 }
 
 .projectName {
