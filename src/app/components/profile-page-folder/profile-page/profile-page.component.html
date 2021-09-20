@@ -1,15 +1,12 @@
-<main class="profilePageContainer text-break container">
-  <ng-container *ngIf="userProfile">
+<main *ngIf = "isHidden" class="profilePageContainer text-break container">
+  <ng-container *ngIf="userDetails">
     <div class="profileDivContainer">
       <img class="m-2" id="profilePicture"
         src="https://www.pngarts.com/files/10/Default-Profile-Picture-PNG-High-Quality-Image.png" alt="">
 
-      <h1 class="m-2" id="usernameTitle" *ngIf="userProfile.username">{{userProfile.username}}</h1>
-      <div class="userNames m-1">
-        <h4 class="m-1" id="userFirstName" *ngIf="userProfile.firstName">{{userProfile.firstName}}</h4>
-        <h4 class="m-1" id="userLastName" *ngIf="userProfile.lastName">{{userProfile.lastName}}</h4>
-      </div>
-      <p *ngIf="userProfile?.id">{{userProfile?.id}}</p>
+      <h1 class="m-2" id="usernameTitle" *ngIf="userDetails.userName">{{userDetails.userName}}</h1>
+      
+      <!--<p *ngIf="userProfile?.id">{{userProfile?.id}}</p>-->
       <p class="m-2" id="profileDescription" *ngIf="userDetails?.description">{{userDetails?.description}}</p>
 
     </div>
@@ -59,10 +56,11 @@
       </app-project-item>
     </div>
     <div class="portfolioContainer">
-      <app-portfolio-list-item class="portfolioListItem" >
-
+      <app-portfolio-list-item class="portfolioListItem" *ngFor="let portfolio of userDetails?.portfolios" [portfolio]="portfolio" >
       </app-portfolio-list-item>
     </div>
+    
+    <div class="hiddenExplanationContainer"></div>
 
     <div class="rightLowerContainer">
       <!--<ng-container *ngIf="user.skills">-->
@@ -73,5 +71,26 @@
       <!--</ng-container>-->
 
     </div>
+  </ng-container>
+</main>
+
+<main *ngIf = "isHidden == false" class="profilePageContainer text-break container">
+  <ng-container *ngIf="userDetails">
+      <div class="profileDivContainer">
+          <img class="m-2" id="profilePicture"
+              src="https://www.pngarts.com/files/10/Default-Profile-Picture-PNG-High-Quality-Image.png" alt="">
+
+          <h1 class="m-2" id="usernameTitle" *ngIf="userDetails.userName">{{userDetails.userName}}</h1>
+         
+          <p *ngIf="userProfile?.id">{{userProfile?.id}}</p>
+      </div>
+      <div class="rightUpperContainer"></div>
+      <div class="projectContainer"></div>
+      <div class="portfolioContainer"></div>
+      <div class="hiddenExplanationContainer">
+          <p>This profile is in hidden mode and their details are therefore not visible.</p>
+      </div>
+      <div class="rightLowerContainer"></div>
+
   </ng-container>
 </main>
