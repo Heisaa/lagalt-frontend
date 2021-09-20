@@ -20,6 +20,7 @@ const routes: Routes = [
     component: MainPageComponent,
     pathMatch: 'full'
   },
+  
   // {
   //   path: "**",
   //   redirectTo: "",

@@ -58,7 +58,6 @@ export class MessageBoardComponent implements OnInit {
     this.projectService.getMessages(projectId)
       .subscribe((data: Message[]) => {
         this.messages = data;
-        console.log(data)
       })
   }
 

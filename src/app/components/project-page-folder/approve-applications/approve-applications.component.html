@@ -1,0 +1,21 @@
+<div class="modal" tabindex="-1" [ngStyle]="{'display':'block'}" *ngIf="project">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Applications to approve</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                    (click)="closeModal()"></button>
+            </div>
+            <div class="modal-body">
+                <div *ngFor="let application of notApprovedApplications">
+                    {{application.motivation}}
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+                    (click)="closeModal()">Close</button>
+                <button type="button" class="btn btn-primary" (click)="submitApprovals()">Submit Appovals</button>
+            </div>
+        </div>
+    </div>
+</div>

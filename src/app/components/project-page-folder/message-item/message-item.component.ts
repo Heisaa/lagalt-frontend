@@ -17,6 +17,7 @@ export class MessageItemComponent implements OnInit {
   ngOnInit(): void {
     if (this.message) {
       this.getUser(this.message.userId);
+      this.message.timeStamp = new Date(this.message.timeStamp).toLocaleString()
     }
   }
 

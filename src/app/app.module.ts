@@ -22,6 +22,7 @@ import { PortfolioListItemComponent } from './components/profile-page-folder/por
 import { PhotoDisplayComponent } from './components/project-page-folder/photo-display/photo-display.component';
 import { MessageBoardComponent } from './components/project-page-folder/message-board/message-board.component';
 import { MessageItemComponent } from './components/project-page-folder/message-item/message-item.component';
+import { ApproveApplicationsComponent } from './components/project-page-folder/approve-applications/approve-applications.component';
 
 
 function initializeKeycloak(keycloak: KeycloakService) {
@@ -64,6 +65,7 @@ function initializeKeycloak(keycloak: KeycloakService) {
     PhotoDisplayComponent,
     MessageBoardComponent,
     MessageItemComponent,
+    ApproveApplicationsComponent,
   ],
   imports: [
     BrowserModule,

@@ -8,11 +8,17 @@ export interface Project {
     description: string;
     photos: string[];
     progress: number;
+    projectUsers: ProjectUser[]
 } 
 
 interface Keyword {
     id: number;
     name: string;
+}
+
+interface ProjectUser {
+    userId: string;
+    owner: boolean;
 }
 
 export interface ProjectPage {
