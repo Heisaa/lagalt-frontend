@@ -39,7 +39,6 @@ export class MessageBoardComponent implements OnInit {
         projectId: this.project.projectId,
         userId: this.userProfile.id,
         text: this.submittedMessage,
-        timeStamp: Date.now().toString(),
       }
 
       this.projectService
