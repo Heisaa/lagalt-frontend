@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { KeycloakService } from 'keycloak-angular';
 import { KeycloakProfile } from 'keycloak-js';
 import { Application } from 'src/app/models/application.model';
@@ -24,12 +24,14 @@ export class ProjectPageComponent implements OnInit {
   motivation = "";
   isAdmin = true;
   notApprovedApplications: Application[] | undefined;
+  showApplications = false;
 
   constructor(
     private route: ActivatedRoute,
     private readonly projectService: ProjectsService,
     private readonly keycloak: KeycloakService,
-    private readonly applicationService: ApplicationService
+    private readonly applicationService: ApplicationService,
+    private readonly router: Router,
   ) { }
 
   async ngOnInit() {
@@ -38,8 +40,8 @@ export class ProjectPageComponent implements OnInit {
       this.userProfile = await this.keycloak.loadUserProfile();
 
       //Ta bort sen
-      this.keycloak.getToken()
-        .then(token => console.log(token))
+      // this.keycloak.getToken()
+      //   .then(token => console.log(token))
 
     }
 
@@ -47,12 +49,22 @@ export class ProjectPageComponent implements OnInit {
     this.getProject(this.projectIdFromUrl);
   }
 
+  gotoApplications() {
+    this.showApplications = true;
+  }
+
+  closeApplications(close: boolean) {
+    this.showApplications = false;
+  }
+
   getProject(id: number) {
     this.projectService.getProject(id)
       .subscribe((data: Project) => {
         this.project = data;
         this.progress = this.progressSteps[data.progress];
-        // compare userid adminid
+        if (true) {// compare userid adminid
+          this.getApplicationsByProjects(data.projectId);
+        }
       });
   }
 
@@ -87,8 +99,9 @@ export class ProjectPageComponent implements OnInit {
   getApplicationsByProjects(projectId: number) {
     this.applicationService.getApplicationByProject(projectId)
       .subscribe((data: Application[]) => {
-        console.log("")
-        this.notApprovedApplications = data.filter(application => application.approved == false);
+        
+        this.notApprovedApplications = data.filter(application => application.approved === false);
+        console.log(this.notApprovedApplications)
       })
   }
 

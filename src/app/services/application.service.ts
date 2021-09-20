@@ -8,7 +8,7 @@ import { Application } from '../models/application.model';
 })
 export class ApplicationService {
   private applicationUrl = environment.apiUrl + "Application";
-  private applicationsByProjectUrl = environment + "projects"
+  private applicationsByProjectUrl = environment.apiUrl + "projects"
 
   constructor(private readonly http: HttpClient) { }
 
@@ -17,6 +17,6 @@ export class ApplicationService {
   }
 
   getApplicationByProject(projectId: number) {
-    return this.http.get<Application[]>(this.applicationsByProjectUrl + projectId + "applications")
+    return this.http.get<Application[]>(this.applicationsByProjectUrl + "/" +projectId + "/applications")
   }
 }

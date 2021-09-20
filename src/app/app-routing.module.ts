@@ -21,10 +21,12 @@ const routes: Routes = [
     component: MainPageComponent,
     pathMatch: 'full'
   },
+
   {
     path: "profile/edit/:id", 
     component: EditProfilePageComponent,
   },
+
   // {
   //   path: "**",
   //   redirectTo: "",
