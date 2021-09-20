@@ -1,7 +1,9 @@
 import { unescapeIdentifier } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { KeycloakService } from 'keycloak-angular';
 import { KeycloakProfile } from 'keycloak-js';
+import { Portfolio } from 'src/app/models/portfolio.model';
 import { Project } from 'src/app/models/project.model';
 import { Skill, User } from 'src/app/models/user.model';
 import { ProjectsService } from 'src/app/services/projects.service';
@@ -20,37 +22,59 @@ export class ProfilePageComponent implements OnInit {
   public userId: string = "";
   projects: Project[] = [];
   skills: Skill[] = [];
+  isHidden: boolean = false;
+  //portfolios: [] = [];
 
-  constructor(private readonly keycloak: KeycloakService, public readonly userService: UserService, private readonly projectsService: ProjectsService) { }
+  constructor(private readonly route: ActivatedRoute, private readonly keycloak: KeycloakService, public readonly userService: UserService, private readonly projectsService: ProjectsService, private readonly router: Router) { }
 
   public async ngOnInit() {
     this.isLoggedIn = await this.keycloak.isLoggedIn();
+
+    console.log(this.route.snapshot.url[1].toString());
 
     if (this.isLoggedIn) {
       this.userProfile = await this.keycloak.loadUserProfile();
       if (this.userProfile.id != undefined) {
         this.getUser(this.userProfile.id);
         this.getProjects(this.userProfile.id);
+
+
+        if ((this.route.snapshot.url[1].toString() !== this.userId) && (this.userDetails?.hidden)) {
+          
+          this.isHidden = false;
+        } else {
+          this.isHidden = true;
+        }
+      }
+    } else {
+      console.log("NOT LOGGED IN");
+      this.userId = this.route.snapshot.url[1].toString();
+      console.log("USER ID, NOT LOGGED IN " + this.userId)
+      this.getUser(this.userId);
+
+      if (this.userDetails?.hidden) {
+        this.isHidden = true;
+      } else {
+        this.isHidden = false;
       }
     }
-    
-    this.keycloak.getToken()
-    .then(token=>this.token=token);
 
   }
+
+
 
   getUser(id: string) {
     this.userService.getUserById(id)
       .subscribe((data: User) => {
         this.userDetails = data;
         this.skills = data.skills;
+        //this.portfolios = data.portfolios;
       });
   }
 
   getProjects(id: string) {
     this.projectsService.getProjectsByUser(id)
-      .subscribe((data: Project[]) =>
-      {
+      .subscribe((data: Project[]) => {
         this.projects = data;
         data.forEach(element => {
           console.log("TEST" + element.projectName + element.projectId)
@@ -66,5 +90,5 @@ export class ProfilePageComponent implements OnInit {
     this.keycloak.logout();
   }
 
- 
+
 }

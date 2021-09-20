@@ -16,9 +16,9 @@
     <div class="accordion-collapse collapse" [id]="'banner' + project.projectId">
         <div class="accordion-body">
             <ul>
-                <!--<li>
-                    {{description}}
-                </li>-->
+                <li>
+                    {{project.description}}
+                </li>
                 <li *ngFor="let keyword of project.keywords">
                     {{keyword.name}}
                 </li>
