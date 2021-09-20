@@ -37,6 +37,7 @@ export class ProjectPageComponent implements OnInit {
     this.isLoggedIn = await this.keycloak.isLoggedIn();
     if (this.isLoggedIn) {
       this.userProfile = await this.keycloak.loadUserProfile();
+      //Ta bort sen
       this.keycloak.getToken()
     .then(token=> console.log(token))
 
