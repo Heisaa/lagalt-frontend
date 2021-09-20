@@ -7,6 +7,7 @@ export interface Project {
     fields: Field[];
     description: string;
     photos: string[];
+    progress: number;
 } 
 
 interface Keyword {
@@ -27,4 +28,10 @@ export interface Message {
     userId: string;
     text: string;
     timeStamp: string;
+}
+
+export interface PostMessage {
+    projectId: number;
+    userId: string;
+    text: string;
 }
