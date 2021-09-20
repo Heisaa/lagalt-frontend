@@ -1,18 +1,35 @@
 <main *ngIf="project" class="container">
     <app-photo-display class="projectImage" [project]="project"></app-photo-display>
     
-    <h1 class="projectName white ps-3 d-flex align-items-center fw-bold">{{project.projectName}}</h1>
+    <h1 class="projectName white p-3 d-flex align-items-center fw-bold">{{project.projectName}}</h1>
     <div class="description white p-3">
         <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-            dolore
-            magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-            commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat
-            nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit
-            anim id est laborum.
+            {{project.description}}
         </p>
     </div>
     <app-message-board class="messageBoard" *ngIf="project" [project]="project"></app-message-board>
-    <div class="links white"></div>
+    <div class="links white p-3">
+        <Button class="btn btn-primary" (click)="openModal()">Apply to Project</Button>
+        <p>{{applicationFeedback}}</p>
+        <h2 class="fs-5 my-4">Progress status: {{this.progress}}</h2>
+    </div>
     <div class="members white"></div>
 </main>
+<div class="modal" tabindex="-1" [ngStyle]="{'display':modalDisplay}">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Modal title</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="closeModal()"></button>
+        </div>
+        <div class="modal-body">
+          <p>Modal body text goes here.</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="closeModal()">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  

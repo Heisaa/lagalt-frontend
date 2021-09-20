@@ -24,13 +24,16 @@ main {
 .messageBoard {
     grid-area: messageBoard;
     margin-top: 20px;
+    margin-right: 10px;
 }
 
 .links {
     grid-area: links;
     margin-top: 20px;
+    margin-left: 10px;
 }
 
 .members {
     grid-area: members;
+    margin-left: 10px;
 }

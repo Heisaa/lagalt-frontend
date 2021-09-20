@@ -12,10 +12,15 @@
     --yellowGreen: #7a6f04;
     /* --bs-body-font-family: 'M PLUS Rounded 1c', sans-serif; */
     --bs-primary-rgb: 64,86,161;
+    --bs-primary: #4056A1;
 }
 
 .white {
     background-color: white;
+}
+
+.btn-primary {
+    background-color: #4056A1;
 }
 
 body, h1, h2, h3, h4, h5, h6 {
