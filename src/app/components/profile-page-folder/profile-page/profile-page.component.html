@@ -1,11 +1,11 @@
-<main *ngIf = "isHidden" class="profilePageContainer text-break container">
+<main *ngIf="isHidden" class="profilePageContainer text-break container">
   <ng-container *ngIf="userDetails">
     <div class="profileDivContainer">
       <img class="m-2" id="profilePicture"
         src="https://www.pngarts.com/files/10/Default-Profile-Picture-PNG-High-Quality-Image.png" alt="">
 
       <h1 class="m-2" id="usernameTitle" *ngIf="userDetails.userName">{{userDetails.userName}}</h1>
-      
+
       <!--<p *ngIf="userProfile?.id">{{userProfile?.id}}</p>-->
       <p class="m-2" id="profileDescription" *ngIf="userDetails?.description">{{userDetails?.description}}</p>
 
@@ -18,48 +18,19 @@
         <input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off">
         <label class="btn btn-outline-danger" for="btnradio2">Hidden</label>
       </div>
+      <button *ngIf="isOwnPage" class="btn btn-warning m-2" (click)="goToEdit()">Edit</button>
     </div>
-
-
-    <!--<ng-container *ngIf="userProfile">
-      <h2>User information</h2>
-      <table>
-        <tr *ngIf="userProfile.username">
-          <th scope="row">Username</th>
-          <td>{{ userProfile.username }}</td>
-        </tr>
-        <tr *ngIf="userProfile.firstName">
-          <th scope="row">First name</th>
-          <td>{{ userProfile.firstName }}</td>
-        </tr>
-        <tr *ngIf="userProfile.lastName">
-          <th scope="row">First name</th>
-          <td>{{ userProfile.lastName }}</td>
-        </tr>
-        <tr *ngIf="userProfile.email">
-          <th scope="row">E-mail</th>
-          <td>{{ userProfile.email }}</td>
-        </tr>
-        <tr>
-          <th scope="row">E-mail verified</th>
-          <td>{{ userProfile.emailVerified ? 'Yes' : 'No' }}</td>
-        </tr>
-        <tr>
-          <th scope="row">Token</th>
-          <td>{{ token }}</td>
-        </tr>
-      </table>
-    </ng-container>-->
 
     <div class="projectContainer">
       <app-project-item class="projectListItem" *ngFor="let project of projects" [project]="project">
       </app-project-item>
     </div>
     <div class="portfolioContainer">
-      <app-portfolio-list-item class="portfolioListItem" *ngFor="let portfolio of userDetails?.portfolios" [portfolio]="portfolio" >
+      <app-portfolio-list-item class="portfolioListItem" *ngFor="let portfolio of userDetails?.portfolios"
+        [portfolio]="portfolio">
       </app-portfolio-list-item>
     </div>
-    
+
     <div class="hiddenExplanationContainer"></div>
 
     <div class="rightLowerContainer">
@@ -74,23 +45,23 @@
   </ng-container>
 </main>
 
-<main *ngIf = "isHidden == false" class="profilePageContainer text-break container">
+<main *ngIf="isHidden == false" class="profilePageContainer text-break container">
   <ng-container *ngIf="userDetails">
-      <div class="profileDivContainer">
-          <img class="m-2" id="profilePicture"
-              src="https://www.pngarts.com/files/10/Default-Profile-Picture-PNG-High-Quality-Image.png" alt="">
+    <div class="profileDivContainer">
+      <img class="m-2" id="profilePicture"
+        src="https://www.pngarts.com/files/10/Default-Profile-Picture-PNG-High-Quality-Image.png" alt="">
 
-          <h1 class="m-2" id="usernameTitle" *ngIf="userDetails.userName">{{userDetails.userName}}</h1>
-         
-          <p *ngIf="userProfile?.id">{{userProfile?.id}}</p>
-      </div>
-      <div class="rightUpperContainer"></div>
-      <div class="projectContainer"></div>
-      <div class="portfolioContainer"></div>
-      <div class="hiddenExplanationContainer">
-          <p>This profile is in hidden mode and their details are therefore not visible.</p>
-      </div>
-      <div class="rightLowerContainer"></div>
+      <h1 class="m-2" id="usernameTitle" *ngIf="userDetails.userName">{{userDetails.userName}}</h1>
+
+      <p *ngIf="userProfile?.id">{{userProfile?.id}}</p>
+    </div>
+    <div class="rightUpperContainer"></div>
+    <div class="projectContainer"></div>
+    <div class="portfolioContainer"></div>
+    <div class="hiddenExplanationContainer">
+      <p>This profile is in hidden mode and their details are therefore not visible.</p>
+    </div>
+    <div class="rightLowerContainer"></div>
 
   </ng-container>
 </main>
