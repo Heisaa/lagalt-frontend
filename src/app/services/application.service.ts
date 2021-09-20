@@ -8,10 +8,15 @@ import { Application } from '../models/application.model';
 })
 export class ApplicationService {
   private applicationUrl = environment.apiUrl + "Application";
+  private applicationsByProjectUrl = environment + "projects"
 
   constructor(private readonly http: HttpClient) { }
 
   addApplication(application: Application) {
     return this.http.post<Application>(this.applicationUrl, application);
+  }
+
+  getApplicationByProject(projectId: number) {
+    return this.http.get<Application[]>(this.applicationsByProjectUrl + projectId + "applications")
   }
 }
