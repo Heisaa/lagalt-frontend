@@ -1,6 +1,6 @@
 <main *ngIf="project" class="container">
     <app-photo-display class="projectImage" [project]="project"></app-photo-display>
-    
+
     <h1 class="projectName white p-3 d-flex align-items-center fw-bold">{{project.projectName}}</h1>
     <div class="description white p-3">
         <p>
@@ -9,28 +9,37 @@
     </div>
     <app-message-board class="messageBoard" *ngIf="project" [project]="project"></app-message-board>
     <div class="links white p-3">
-        <Button class="btn btn-primary" (click)="openModal()">Apply to Project</Button>
-        <p>{{applicationFeedback}}</p>
+        <div *ngIf="isAdmin; else notAdmin">
+            <ng-template *ngIf="notApprovedApplications">
+                Pending Applications!
+            </ng-template>
+        </div>
+        <ng-template #notAdmin>
+            <Button class="btn btn-primary" (click)="openModal()">Apply to Project</Button>
+            <p>{{applicationFeedback}}</p>
+        </ng-template>
         <h2 class="fs-5 my-4">Progress status: {{this.progress}}</h2>
     </div>
     <div class="members white"></div>
 </main>
+
 <div class="modal" tabindex="-1" [ngStyle]="{'display':modalDisplay}" *ngIf="project">
     <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title">Application to join {{project.projectName}}</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="closeModal()"></button>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Application to join {{project.projectName}}</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                    (click)="closeModal()"></button>
+            </div>
+            <div class="modal-body">
+                <p>Motivate here why you want to join this project</p>
+                <textarea class="form-control" rows="3" name="first" [(ngModel)]="motivation"></textarea>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+                    (click)="closeModal()">Close</button>
+                <button type="button" class="btn btn-primary" (click)="applyToProject()">Send application</button>
+            </div>
         </div>
-        <div class="modal-body">
-          <p>Motivate here why you want to join this project</p>
-          <textarea class="form-control" rows="3" name="first" [(ngModel)]="motivation"></textarea>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="closeModal()">Close</button>
-          <button type="button" class="btn btn-primary" (click)="applyToProject()">Send application</button>
-        </div>
-      </div>
     </div>
-  </div>
-  
+</div>

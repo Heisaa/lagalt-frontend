@@ -15,14 +15,15 @@ import { ProjectsService } from 'src/app/services/projects.service';
 export class ProjectPageComponent implements OnInit {
   projectIdFromUrl: number | undefined;
   project: Project | undefined;
-  progressSteps = ["Founding", "In progress", "Stalled", "Completed"]
+  progressSteps = ["Founding", "In progress", "Stalled", "Completed"];
   progress: string | undefined;
   applicationFeedback = "";
   public isLoggedIn = false;
   public userProfile: KeycloakProfile | null = null;
   modalDisplay = "none";
   motivation = "";
-
+  isAdmin = true;
+  notApprovedApplications: Application[] | undefined;
 
   constructor(
     private route: ActivatedRoute,
@@ -32,17 +33,18 @@ export class ProjectPageComponent implements OnInit {
   ) { }
 
   async ngOnInit() {
-    this.projectIdFromUrl = Number(this.route.snapshot.paramMap.get("id"));
-    this.getProject(this.projectIdFromUrl);
-
     this.isLoggedIn = await this.keycloak.isLoggedIn();
     if (this.isLoggedIn) {
       this.userProfile = await this.keycloak.loadUserProfile();
+
       //Ta bort sen
       this.keycloak.getToken()
         .then(token => console.log(token))
 
     }
+
+    this.projectIdFromUrl = Number(this.route.snapshot.paramMap.get("id"));
+    this.getProject(this.projectIdFromUrl);
   }
 
   getProject(id: number) {
@@ -50,6 +52,7 @@ export class ProjectPageComponent implements OnInit {
       .subscribe((data: Project) => {
         this.project = data;
         this.progress = this.progressSteps[data.progress];
+        // compare userid adminid
       });
   }
 
@@ -64,20 +67,37 @@ export class ProjectPageComponent implements OnInit {
         approved: false,
         apprvedByOwnerId: null,
       }
+
+      this.addApplication(application);
+      this.applicationFeedback = "You have applied to this project!";
+      this.closeModal();
     }
 
-    this.applicationFeedback = "You have applied to this project!";
+
+
   }
 
   addApplication(application: Application) {
     this.applicationService.addApplication(application)
-      .subscribe();
+      .subscribe(data => {
+        console.log(data);
+      });
+  }
+
+  getApplicationsByProjects(projectId: number) {
+    this.applicationService.getApplicationByProject(projectId)
+      .subscribe((data: Application[]) => {
+        console.log("")
+        this.notApprovedApplications = data.filter(application => application.approved == false);
+      })
   }
 
   openModal() {
     this.modalDisplay = "block";
   }
+
   closeModal() {
+    this.motivation = "";
     this.modalDisplay = "none";
   }
 
