@@ -21,14 +21,15 @@ export class ProjectPageComponent implements OnInit {
   public isLoggedIn = false;
   public userProfile: KeycloakProfile | null = null;
   modalDisplay = "none";
+  motivation = "";
 
 
   constructor(
-    private route: ActivatedRoute, 
+    private route: ActivatedRoute,
     private readonly projectService: ProjectsService,
     private readonly keycloak: KeycloakService,
     private readonly applicationService: ApplicationService
-    ) {}
+  ) { }
 
   async ngOnInit() {
     this.projectIdFromUrl = Number(this.route.snapshot.paramMap.get("id"));
@@ -39,7 +40,7 @@ export class ProjectPageComponent implements OnInit {
       this.userProfile = await this.keycloak.loadUserProfile();
       //Ta bort sen
       this.keycloak.getToken()
-    .then(token=> console.log(token))
+        .then(token => console.log(token))
 
     }
   }
@@ -54,8 +55,18 @@ export class ProjectPageComponent implements OnInit {
 
   //Todo kolla så att man inte är admin eller redan är med i projektet, visa då inte knappen i html
   applyToProject() {
-    this.applicationFeedback = "You have applied to this project!";
 
+    if (this.userProfile != null && this.userProfile.id != undefined && this.project != null) {
+      const application: Application = {
+        userId: this.userProfile.id,
+        projectId: this.project.projectId,
+        motivation: this.motivation,
+        approved: false,
+        apprvedByOwnerId: null,
+      }
+    }
+
+    this.applicationFeedback = "You have applied to this project!";
   }
 
   addApplication(application: Application) {
