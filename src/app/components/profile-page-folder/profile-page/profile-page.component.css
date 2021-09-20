@@ -6,11 +6,12 @@ main {
     display: grid;
     grid-template-areas: 
                     "profileDivContainer rightUpperContainer"
+                    "hiddenExplanationContainer rightLowerContainer"
                     "projectContainer rightLowerContainer"
                     "portfolioContainer rightLowerContainer";
 
     grid-template-columns: auto 250px;
-    grid-template-rows: 0.5fr auto 1fr;
+    grid-template-rows: 0.5fr auto auto 1fr;
     gap: 20px;
     box-sizing: border-box; 
     
@@ -42,7 +43,7 @@ main {
     display: grid;
     grid-template-areas: 
                     "profilePicture usernameTitle"
-                    "profilePicture userNames"
+                    "profilePicture profileDescription"
                     "profilePicture profileDescription";
     grid-template-columns: 250px auto;
     grid-template-rows: 80px auto;
@@ -69,6 +70,10 @@ main {
 #profileDescription {
     background-color: darkgrey;
     grid-area: profileDescription;
+}
+
+.hiddenExplanationContainer {
+    background-color: lightgray;
 }
 
 
