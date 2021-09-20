@@ -32,7 +32,7 @@ function initializeKeycloak(keycloak: KeycloakService) {
       config: {
         url: AUTH_URL,
         realm: 'lagalt',
-        clientId: 'lagaltAPI',
+        clientId: 'lagalt',
       },
       initOptions: {
         checkLoginIframe: true,

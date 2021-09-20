@@ -15,19 +15,20 @@
     </div>
     <div class="members white"></div>
 </main>
-<div class="modal" tabindex="-1" [ngStyle]="{'display':modalDisplay}">
+<div class="modal" tabindex="-1" [ngStyle]="{'display':modalDisplay}" *ngIf="project">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title">Modal title</h5>
+          <h5 class="modal-title">Application to join {{project.projectName}}</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="closeModal()"></button>
         </div>
         <div class="modal-body">
-          <p>Modal body text goes here.</p>
+          <p>Motivate here why you want to join this project</p>
+          <textarea class="form-control" rows="3" name="first" [(ngModel)]="motivation"></textarea>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="closeModal()">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
+          <button type="button" class="btn btn-primary" (click)="applyToProject()">Send application</button>
         </div>
       </div>
     </div>
