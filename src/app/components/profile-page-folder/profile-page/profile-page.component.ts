@@ -1,5 +1,5 @@
 import { unescapeIdentifier } from '@angular/compiler';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { KeycloakService } from 'keycloak-angular';
 import { KeycloakProfile } from 'keycloak-js';
@@ -24,8 +24,10 @@ export class ProfilePageComponent implements OnInit {
   skills: Skill[] = [];
   isHidden: boolean = false;
   //portfolios: [] = [];
+  isOwnPage: boolean = false;
 
   constructor(private readonly route: ActivatedRoute, private readonly keycloak: KeycloakService, public readonly userService: UserService, private readonly projectsService: ProjectsService, private readonly router: Router) { }
+  
 
   public async ngOnInit() {
     this.isLoggedIn = await this.keycloak.isLoggedIn();
@@ -37,14 +39,14 @@ export class ProfilePageComponent implements OnInit {
       if (this.userProfile.id != undefined) {
         this.getUser(this.userProfile.id);
         this.getProjects(this.userProfile.id);
-
+        this.isOwnPageCheck(this.userProfile.id);
 
         if ((this.route.snapshot.url[1].toString() !== this.userId) && (this.userDetails?.hidden)) {
-          
           this.isHidden = false;
         } else {
           this.isHidden = true;
         }
+
       }
     } else {
       console.log("NOT LOGGED IN");
@@ -59,6 +61,12 @@ export class ProfilePageComponent implements OnInit {
       }
     }
 
+  }
+
+  isOwnPageCheck(id: string) {
+    if ((this.route.snapshot.url[1].toString() === id)) {
+      this.isOwnPage = true;
+    } 
   }
 
 
@@ -80,6 +88,10 @@ export class ProfilePageComponent implements OnInit {
           console.log("TEST" + element.projectName + element.projectId)
         });
       })
+  }
+
+  goToEdit() {
+    this.router.navigateByUrl("profile/edit/" + this.userDetails?.userId);
   }
 
   public login() {

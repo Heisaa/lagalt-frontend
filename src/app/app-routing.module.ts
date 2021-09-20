@@ -4,6 +4,7 @@ import { MainPageComponent } from './components/main-page-folder/main-page/main-
 import { ProfilePageComponent } from './components/profile-page-folder/profile-page/profile-page.component';
 import { ProjectPageComponent } from './components/project-page-folder/project-page/project-page.component';
 import { AuthGuard } from './auth/auth.guard';
+import { EditProfilePageComponent } from './components/edit-profile-page/edit-profile-page.component';
 
 const routes: Routes = [
   
@@ -19,6 +20,10 @@ const routes: Routes = [
     path: "",
     component: MainPageComponent,
     pathMatch: 'full'
+  },
+  {
+    path: "profile/edit/:id", 
+    component: EditProfilePageComponent,
   },
   // {
   //   path: "**",

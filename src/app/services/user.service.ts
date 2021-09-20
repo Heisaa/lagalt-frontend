@@ -15,4 +15,6 @@ export class UserService {
     return this.http.get<User>(this.userBaseUrl + id);
   }
 
+  //POST user for calls from app.component.ts
+
 }
