@@ -6,16 +6,36 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
                     (click)="closeModal()"></button>
             </div>
-            <div class="modal-body">
-                <div *ngFor="let application of notApprovedApplications">
-                    {{application.motivation}}
+            <form #approveForm="ngForm" (submit)="submitApprovals(approveForm)" novalidate>
+                <div class="modal-body" *ngIf="displayApplications">
+                    <div *ngFor="let application of displayApplications; let i = index"
+                        class="border p-2 mt-2 d-flex justify-content-between">
+                        <div>
+                            <h4 *ngIf="application.user">Application by {{application.user.userName}}</h4>
+                            <h5>Motivation:</h5>
+                            {{application.motivation}}
+                        </div>
+                        <div *ngIf="isSubmitted && approveForm.invalid">
+                            <p>Please select either approve or deny</p>
+                        </div>
+                        <div>
+                            <input type="radio" class="btn-check" [name]="'application' + application.applicationId" value="approve"
+                                [id]="'approve' + i" autocomplete="off" ngModel required>
+                            <label class="btn btn-outline-success me-2" [for]="'approve' + i">Approve</label>
+
+                            <input type="radio" class="btn-check" [name]="'application' + application.applicationId" value="deny"
+                                [id]="'deny' + i" autocomplete="off" ngModel required>
+                            <label class="btn btn-outline-danger" [for]="'deny' + i">Deny</label>
+                        </div>
+                        
+                    </div>
                 </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
-                    (click)="closeModal()">Close</button>
-                <button type="button" class="btn btn-primary" (click)="submitApprovals()">Submit Appovals</button>
-            </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+                        (click)="closeModal()">Close</button>
+                    <button type="submit" class="btn btn-primary">Submit Appovals</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>

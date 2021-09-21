@@ -1,7 +1,7 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { Application } from '../models/application.model';
+import { Application, ApplicationGet } from '../models/application.model';
 
 @Injectable({
   providedIn: 'root'
@@ -17,6 +17,10 @@ export class ApplicationService {
   }
 
   getApplicationByProject(projectId: number) {
-    return this.http.get<Application[]>(this.applicationsByProjectUrl + "/" +projectId + "/applications")
+    return this.http.get<ApplicationGet[]>(this.applicationsByProjectUrl + "/" +projectId + "/applications")
+  }
+
+  setApproved(applicationId: number, ownerId: string) {
+    return this.http.put<any>(this.applicationUrl, {}, { params: { applicationId, ownerId } })
   }
 }

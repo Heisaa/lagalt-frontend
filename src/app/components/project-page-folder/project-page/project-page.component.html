@@ -11,7 +11,7 @@
     <div class="links white p-3">
         <ng-container *ngIf="isAdmin; else notAdmin">
             <ng-container *ngIf="notApprovedApplications && notApprovedApplications.length > 0; else noApplications">
-                Pending Applications! <button class="btn btn-primary" (click)="gotoApplications()">Go to applications</button>
+                Pending Applications! <button class="btn btn-primary mt-2" (click)="gotoApplications()">Go to applications</button>
             </ng-container>
             <ng-template #noApplications>
                 No applications!
