@@ -36,5 +36,8 @@ export class ProjectsService {
     return this.http.post<PostMessage>(this.messageUrl, message);
   }
 
+  addUserToProject(projectId: number, userId: string) {
+    return this.http.put<any>(this.projectsUrl + "/" + projectId + "/user/" + userId, {}, {params: {projectId, userId}})
+  }
 
 }

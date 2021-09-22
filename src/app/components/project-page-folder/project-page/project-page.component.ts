@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { KeycloakService } from 'keycloak-angular';
 import { KeycloakProfile } from 'keycloak-js';
-import { Application } from 'src/app/models/application.model';
+import { Application, ApplicationGet } from 'src/app/models/application.model';
 import { Project } from 'src/app/models/project.model';
 import { ApplicationService } from 'src/app/services/application.service';
 import { ProjectsService } from 'src/app/services/projects.service';
@@ -22,14 +22,16 @@ export class ProjectPageComponent implements OnInit {
   public userProfile: KeycloakProfile | null = null;
   modalDisplay = "none";
   motivation = "";
-  isAdmin = true;
-  notApprovedApplications: Application[] | undefined;
+  isAdmin = false;
+  notApprovedApplications: ApplicationGet[] | undefined;
+  showApplications = false;
 
   constructor(
     private route: ActivatedRoute,
     private readonly projectService: ProjectsService,
     private readonly keycloak: KeycloakService,
-    private readonly applicationService: ApplicationService
+    private readonly applicationService: ApplicationService,
+    private readonly router: Router,
   ) { }
 
   async ngOnInit() {
@@ -38,8 +40,8 @@ export class ProjectPageComponent implements OnInit {
       this.userProfile = await this.keycloak.loadUserProfile();
 
       //Ta bort sen
-      this.keycloak.getToken()
-        .then(token => console.log(token))
+      // this.keycloak.getToken()
+      //   .then(token => console.log(token))
 
     }
 
@@ -47,12 +49,31 @@ export class ProjectPageComponent implements OnInit {
     this.getProject(this.projectIdFromUrl);
   }
 
+  gotoApplications() {
+    this.showApplications = true;
+  }
+
+  closeApplications(close: boolean) {
+    this.showApplications = false;
+    // Reload applications when closing application window
+    if (this.project != undefined) {
+      this.getApplicationsByProjects(this.project.projectId);
+    }
+  }
+
   getProject(id: number) {
     this.projectService.getProject(id)
       .subscribe((data: Project) => {
         this.project = data;
         this.progress = this.progressSteps[data.progress];
-        // compare userid adminid
+        if (this.userProfile != null) {
+          console.log(this.project.projectUsers.filter(user => user.owner === true)[0].userId)
+          this.isAdmin = this.userProfile.id === this.project.projectUsers.filter(user => user.owner === true)[0].userId;
+          console.log(this.isAdmin)
+        }
+        if (this.isAdmin) {// compare userid adminid
+          this.getApplicationsByProjects(data.projectId);
+        }
       });
   }
 
@@ -65,16 +86,13 @@ export class ProjectPageComponent implements OnInit {
         projectId: this.project.projectId,
         motivation: this.motivation,
         approved: false,
-        apprvedByOwnerId: null,
+        approvedByOwnerId: null,
       }
 
       this.addApplication(application);
       this.applicationFeedback = "You have applied to this project!";
       this.closeModal();
     }
-
-
-
   }
 
   addApplication(application: Application) {
@@ -86,9 +104,10 @@ export class ProjectPageComponent implements OnInit {
 
   getApplicationsByProjects(projectId: number) {
     this.applicationService.getApplicationByProject(projectId)
-      .subscribe((data: Application[]) => {
-        console.log("")
-        this.notApprovedApplications = data.filter(application => application.approved == false);
+      .subscribe((data: ApplicationGet[]) => {
+
+        this.notApprovedApplications = data.filter(application => application.approved === false);
+        console.log(this.notApprovedApplications)
       })
   }
 

@@ -20,8 +20,8 @@ export class MainPageComponent implements OnInit {
   searchFilterdProjects: Project[] = [];
   currentPage = 1;
   itemsPerPage = 10;
-  //Måste få in totalItems från backend
   totalItems = 0;
+  showRight = false;
 
   constructor(
     private readonly fieldService: FieldsService,

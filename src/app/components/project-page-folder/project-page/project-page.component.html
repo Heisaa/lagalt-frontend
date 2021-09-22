@@ -9,11 +9,14 @@
     </div>
     <app-message-board class="messageBoard" *ngIf="project" [project]="project"></app-message-board>
     <div class="links white p-3">
-        <div *ngIf="isAdmin; else notAdmin">
-            <ng-template *ngIf="notApprovedApplications">
-                Pending Applications!
+        <ng-container *ngIf="isAdmin; else notAdmin">
+            <ng-container *ngIf="notApprovedApplications && notApprovedApplications.length > 0; else noApplications">
+                Pending Applications! <button class="btn btn-primary mt-2" (click)="gotoApplications()">Go to applications</button>
+            </ng-container>
+            <ng-template #noApplications>
+                No applications!
             </ng-template>
-        </div>
+        </ng-container>
         <ng-template #notAdmin>
             <Button class="btn btn-primary" (click)="openModal()">Apply to Project</Button>
             <p>{{applicationFeedback}}</p>
@@ -22,7 +25,6 @@
     </div>
     <div class="members white"></div>
 </main>
-
 <div class="modal" tabindex="-1" [ngStyle]="{'display':modalDisplay}" *ngIf="project">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -43,3 +45,4 @@
         </div>
     </div>
 </div>
+<app-approve-applications *ngIf="isAdmin && showApplications" [project]="project" [notApprovedApplications]=notApprovedApplications (closeEvent)="closeApplications($event)"></app-approve-applications>

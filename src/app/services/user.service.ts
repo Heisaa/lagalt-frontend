@@ -15,4 +15,12 @@ export class UserService {
     return this.http.get<User>(this.userBaseUrl + id);
   }
 
+  postUser(user: User) {
+    return this.http.post<User>(this.userBaseUrl, user);
+  }
+
+  /*putUser(user: User) {
+    return this.http.put<User>(this.userBaseUrl, user);
+  }*/
+
 }
