@@ -41,3 +41,9 @@ export interface PostMessage {
     userId: string;
     text: string;
 }
+
+export interface PostProject {
+    projectName: string | undefined;
+    description: string | undefined;
+    urlReference: string | undefined;
+}

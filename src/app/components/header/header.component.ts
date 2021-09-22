@@ -32,6 +32,10 @@ export class HeaderComponent implements OnInit {
     this.router.navigateByUrl("/");
   }
 
+  gotoCreateProject() {
+    this.router.navigateByUrl("/create-project")
+  }
+
   logOut() {
     this.keycloak.logout();
   }
