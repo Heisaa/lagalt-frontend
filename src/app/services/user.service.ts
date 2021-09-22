@@ -15,6 +15,12 @@ export class UserService {
     return this.http.get<User>(this.userBaseUrl + id);
   }
 
-  //POST user for calls from app.component.ts
+  postUser(user: User) {
+    return this.http.post<User>(this.userBaseUrl, user);
+  }
+
+  /*putUser(user: User) {
+    return this.http.put<User>(this.userBaseUrl, user);
+  }*/
 
 }
