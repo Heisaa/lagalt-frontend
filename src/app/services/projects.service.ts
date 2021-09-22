@@ -2,7 +2,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { throwError } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { Message, PostMessage, Project, ProjectPage } from '../models/project.model';
+import { Message, PostMessage, Project, ProjectPage, PostProject } from '../models/project.model';
 import { catchError } from 'rxjs/operators';
 
 @Injectable({
@@ -36,5 +36,7 @@ export class ProjectsService {
     return this.http.post<PostMessage>(this.messageUrl, message);
   }
 
-
+  createProject(project: PostProject) {
+    return this.http.post<PostProject>("https://lagaltapibackend.azurewebsites.net/api/projects", project);
+  }
 }
