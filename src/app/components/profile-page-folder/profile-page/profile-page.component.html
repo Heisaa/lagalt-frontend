@@ -1,8 +1,8 @@
 <main *ngIf="isHidden" class="profilePageContainer text-break container">
   <ng-container *ngIf="userDetails">
     <div class="profileDivContainer">
-      <img class="m-2" id="profilePicture"
-        src="https://www.pngarts.com/files/10/Default-Profile-Picture-PNG-High-Quality-Image.png" alt="">
+      <img class="m-2" id="profilePicture" *ngIf="userDetails.profilePhoto"
+        src="hasPicture ? userDetails.profilePhoto : defaultImage" alt="">
 
       <h1 class="m-2" id="usernameTitle" *ngIf="userDetails.userName">{{userDetails.userName}}</h1>
 
@@ -10,22 +10,24 @@
       <p class="m-2" id="profileDescription" *ngIf="userDetails?.description">{{userDetails?.description}}</p>
 
     </div>
-    <div class="rightUpperContainer d-flex justify-content-end align-items-start">
-      <div class="btn-group m-2" role="group" aria-label="Basic radio toggle button group">
+    <div class=" m-2 rightUpperContainer d-flex justify-content-end align-items-start">
+      <div class="btn-group m-2;" role="group" aria-label="Basic radio toggle button group">
         <input type="radio" class="btn-check " name="btnradio" id="btnradio1" autocomplete="off" checked>
         <label class="btn btn-outline-success" for="btnradio1">Regular</label>
 
         <input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off">
         <label class="btn btn-outline-danger" for="btnradio2">Hidden</label>
       </div>
-      <button *ngIf="isOwnPage" class="btn btn-warning m-2" (click)="goToEdit()">Edit</button>
+      <!--<button *ngIf="isOwnPage" class="btn btn-warning m-2" (click)="goToEdit()">Edit</button>-->
     </div>
 
     <div class="projectContainer">
+      <h2 class="m-1" >Projects</h2>
       <app-project-item class="projectListItem" *ngFor="let project of projects" [project]="project">
       </app-project-item>
     </div>
     <div class="portfolioContainer">
+      <h2 class="m-1">Portfolio</h2>
       <app-portfolio-list-item class="portfolioListItem" *ngFor="let portfolio of userDetails?.portfolios"
         [portfolio]="portfolio">
       </app-portfolio-list-item>
@@ -35,6 +37,7 @@
 
     <div class="rightLowerContainer">
       <!--<ng-container *ngIf="user.skills">-->
+        <h2 class="m-1">Skills</h2>
       <ul class="skillList list-group list-group-flush">
         <li class="list-group-item" *ngFor="let skill of userDetails?.skills; let i = index">{{i + 1}} {{skill}}</li>
       </ul>

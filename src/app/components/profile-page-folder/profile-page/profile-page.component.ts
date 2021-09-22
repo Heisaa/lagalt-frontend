@@ -25,6 +25,8 @@ export class ProfilePageComponent implements OnInit {
   isHidden: boolean = false;
   //portfolios: [] = [];
   isOwnPage: boolean = false;
+  defaultImage: string ="https://avatars.dicebear.com/api/big-smile/emma.svg";
+  hasPicture: boolean = false;
 
   constructor(private readonly route: ActivatedRoute, private readonly keycloak: KeycloakService, public readonly userService: UserService, private readonly projectsService: ProjectsService, private readonly router: Router) { }
   
@@ -76,6 +78,9 @@ export class ProfilePageComponent implements OnInit {
       .subscribe((data: User) => {
         this.userDetails = data;
         this.skills = data.skills;
+        if (this.userDetails.profilePhoto !== null || this.userDetails.profilePhoto !== undefined){
+          this.hasPicture = true;
+        }
         //this.portfolios = data.portfolios;
       });
   }

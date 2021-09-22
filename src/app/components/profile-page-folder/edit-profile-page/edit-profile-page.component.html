@@ -7,7 +7,7 @@
         <h1 class="m-2" id="usernameTitle" *ngIf="userDetails.userName">{{userDetails.userName}}</h1>
   
         <!--<p *ngIf="userProfile?.id">{{userProfile?.id}}</p>-->
-        <input type="text" class="m-2" id="profileDescription" *ngIf="userDetails?.description">{{userDetails?.description}}>
+        <input type="text" class="m-2" id="profileDescription" *ngIf="userDetails?.description" value="{{userDetails?.description}}">>
   
       </div>
       <div class="rightUpperContainer d-flex justify-content-end align-items-start">
