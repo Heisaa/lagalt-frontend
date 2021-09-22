@@ -6,6 +6,7 @@ import { Application, ApplicationDisplay, ApplicationGet } from 'src/app/models/
 import { Project } from 'src/app/models/project.model';
 import { User } from 'src/app/models/user.model';
 import { ApplicationService } from 'src/app/services/application.service';
+import { ProjectsService } from 'src/app/services/projects.service';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -26,7 +27,8 @@ export class ApproveApplicationsComponent implements OnInit {
   constructor(
     private readonly userService: UserService, 
     private readonly applicationService: ApplicationService,
-    private readonly keycloak: KeycloakService
+    private readonly keycloak: KeycloakService,
+    private readonly projectService: ProjectsService
     ) { }
 
   async ngOnInit() {
@@ -50,12 +52,16 @@ export class ApproveApplicationsComponent implements OnInit {
       for (const [key, value] of Object.entries(form.value)) {
         if (this.userProfile != null && this.userProfile.id != undefined) {
           if (value === "approve") {
+            const applicationId = Number(key.slice(11));
             // Set the applications to approved
-            this.setApproved(Number(key.slice(11)), this.userProfile.id);
+            this.setApproved(applicationId, this.userProfile.id);
             // Connect the user and project
-            
+            const userIdToBeAdded = this.displayApplications.find(application => application.applicationId === applicationId)?.userId;
+            if (this.project != undefined && userIdToBeAdded != undefined) {
+              this.projectService.addUserToProject(this.project.projectId, userIdToBeAdded);
+            }
           } else {
-
+            // Deny the application
           }
         }
       }
