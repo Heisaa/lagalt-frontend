@@ -14,6 +14,7 @@ export class AppComponent implements OnInit {
   title = 'lagalt-frontend';
   public userProfile: KeycloakProfile | null = null;
   public isLoggedIn = false;
+  userDetails: User | undefined;
 
   constructor(private readonly keycloak: KeycloakService, private readonly router: Router, private userService: UserService) { }
 
@@ -24,22 +25,53 @@ export class AppComponent implements OnInit {
       this.userProfile = await this.keycloak.loadUserProfile();
       console.log(this.userProfile.firstName);
 
-      if(this.userProfile !== null || this.userProfile !== undefined){
+      if (this.userProfile !== null || this.userProfile !== undefined) {
         var id = this.userProfile.id;
         this.userService.getUserById(id!)
           .subscribe((data: User) => {
-            if(data === null || data === undefined) {
+            if (data === null || data === undefined) {
               //userservice POST new user and route to Editpage
-
+              this.addUserToDatabase();
               this.router.navigateByUrl("profile/edit/" + id);
             }
-          } )
-      } 
-
-      
+          });
+      }
     }
   }
 
-   //check if exists in db, if not = new user -> edit profile component. use keycloak service in edit component
-   // add to db in app component cal
+  addUserToDatabase() {
+    if (this.userProfile?.id != null && this.userProfile?.username != null) {
+      const user: User = {
+        userId: this.userProfile.id,
+        userName: this.userProfile.username,
+        hidden: false,
+        skills: [],
+        fields: [],
+        portfolios: []
+      }
+      this.postUser(user);
+    }
+  }
+
+  /*checkUser (id: string)  {
+    this.userService.getUserById(id) 
+      .subscribe((data: User) => {
+        console.log(data)
+        this.userDetails = data;
+        if (this.userDetails === null || this.userDetails === undefined) {
+          
+        } 
+      });
+    
+  }*/
+
+  postUser(user: User) {
+    this.userService.postUser(user)
+      .subscribe((data: User) => {
+        console.log(data);
+      });
+  }
+
+  //check if exists in db, if not = new user -> edit profile component. use keycloak service in edit component
+  // add to db in app component cal
 }

@@ -16,13 +16,13 @@ import { HttpClientModule } from '@angular/common/http';
 import { ProjectBannerComponent } from './components/project-banner/project-banner.component';
 import { MyProjectsMainComponent } from './components/my-projects-main/my-projects-main.component';
 import { NgxPaginationModule } from 'ngx-pagination';
-import { EditProfilePageComponent } from './components/edit-profile-page/edit-profile-page.component';
 import { ProjectItem } from './components/profile-page-folder/project-item/project-item.component';
 import { PortfolioListItemComponent } from './components/profile-page-folder/portfolio-list-item/portfolio-list-item.component';
 import { PhotoDisplayComponent } from './components/project-page-folder/photo-display/photo-display.component';
 import { MessageBoardComponent } from './components/project-page-folder/message-board/message-board.component';
 import { MessageItemComponent } from './components/project-page-folder/message-item/message-item.component';
 import { ApproveApplicationsComponent } from './components/project-page-folder/approve-applications/approve-applications.component';
+import { EditProfilePageComponent } from './components/profile-page-folder/edit-profile-page/edit-profile-page.component';
 
 
 function initializeKeycloak(keycloak: KeycloakService) {
