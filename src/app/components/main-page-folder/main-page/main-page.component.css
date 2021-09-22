@@ -4,7 +4,7 @@ main {
     grid-template-areas: 
                     "leftSideBar filterBar rightSideBar"
                     "leftSideBar projectFeed rightSideBar";
-    grid-template-columns: auto 1fr var(--right-bar-width);
+    grid-template-columns: auto 1fr auto;
     grid-template-rows: auto 1fr;
     box-sizing: border-box;
 }

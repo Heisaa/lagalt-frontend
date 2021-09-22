@@ -39,4 +39,9 @@ export class ProjectsService {
   createProject(project: PostProject) {
     return this.http.post<PostProject>("https://lagaltapibackend.azurewebsites.net/api/projects", project);
   }
+
+  addUserToProject(projectId: number, userId: string) {
+    return this.http.put<any>(this.projectsUrl + "/" + projectId + "/user/" + userId, {}, {params: {projectId, userId}})
+  }
+
 }
