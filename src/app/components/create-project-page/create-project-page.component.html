@@ -1,15 +1,19 @@
 <div class="container">
-    <form class="mt-3" (ngSubmit)="onSubmit($event)">
+    <form #projectCreateForm="ngForm" class="mt-3" (ngSubmit)="projectCreateForm.form.valid && onSubmit(projectCreateForm)">
         <div class="form-group row">
             <label for="inputProjectName" class="col-sm-2 col-form-label">Project Name</label>
             <div class="col-sm-10">
-                <input type="text" class="col-sm-4 col-form-control" id="inputProjectName" placeholder="Project Name" required>
+                <input type="text" class="col-sm-4 col-form-control" id="inputProjectName" placeholder="Project Name" #name="ngModel" name="name" [(ngModel)]="model.projectName"
+                    [ngClass]="{ 'is-invalid': projectCreateForm.submitted && name.invalid }" required>
+                <div class="invalid-feedback" *ngIf="projectCreateForm.submitted && name.invalid">
+                    <p *ngIf="name.errors?.required">Project name is required</p>
+                </div>
             </div>
         </div>
         <div class="form-group row mt-3">
             <label for="inputProjectUrl" class="col-sm-2 col-form-label">Project Url</label>
             <div class="col-sm-10">
-                <input type="text" class="col-sm-4 col-form-control" id="inputProjectUrl" placeholder="Project Url">
+                <input type="text" class="col-sm-4 col-form-control" id="inputProjectUrl" name="url" placeholder="Project Url" [(ngModel)]="model.urlReference">
                 <small id="projectUrlHelpInline" class="text-muted">
                     ex. link to github repo
                   </small>
@@ -18,7 +22,12 @@
         <div class="form-group row mt-5">
             <label for="textareaProjectDescription" class="col-sm-2 col-form-label">Project Description</label>
             <div class="col-sm-10">
-                <textarea id="textareaProjectDescription" class="col-sm-6 col-form-control" rows="5"></textarea>
+                <textarea id="textareaProjectDescription" class="col-sm-6 col-form-control" rows="5" #description="ngModel" name="description" [(ngModel)]="model.description"
+                    [ngClass]="{ 'is-invalid': projectCreateForm.submitted && description.invalid }" required>
+                </textarea>
+                <div class="invalid-feedback" *ngIf="projectCreateForm.submitted && description.invalid">
+                    <p *ngIf="description.errors?.required">A project description is required</p>
+                </div>
             </div>
         </div>
         <button type="submit" class="btn btn-primary btn-block d-flex justify-content-center mt-4">Create Project</button>

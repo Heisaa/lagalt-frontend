@@ -3,7 +3,7 @@
         <div class="container-fluid">
             <a class="navbar-brand d-flex align-items-center fw-bolder fs-3 headerLogo" (click)="gotoMainPage()">Lagalt <img class="ms-1 headerImg" src="../../../assets/images/logo.png" alt="logo"></a>
             <ul class="navbar-nav" *ngIf="isLoggedIn else loginButton">
-                <button class="btn btn-secondary btn-sm mx-5" (click)="gotoCreateProject()"> + Create Project</button>
+                <button class="btn btn-secondary btn-sm mr-5" (click)="gotoCreateProject()"> + Create Project</button>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button"
                         data-bs-toggle="dropdown" aria-expanded="false" *ngIf="userProfile">
