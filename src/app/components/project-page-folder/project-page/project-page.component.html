@@ -1,6 +1,10 @@
-
 <main *ngIf="project" class="container">
-    <app-photo-display class="projectImage" [project]="project"></app-photo-display>
+    <div *ngIf="hasNoPhotos(); else hasPhotos">
+        <button class="btn btn-primary mx-4 mt-4" (click)="addPhoto()">+ Add Photos</button>
+    </div>
+    <ng-template #hasPhotos>
+        <app-photo-display class="projectImage" [project]="project"></app-photo-display>
+    </ng-template>
 
     <h1 class="projectName white p-3 d-flex align-items-center fw-bold">{{project.projectName}}</h1>
     <div class="description white p-3">
@@ -8,13 +12,21 @@
             {{project.description}}
         </p>
     </div>
-    <app-message-board class="messageBoard" *ngIf="project" [project]="project" [memberOfProject]="memberOfProject"></app-message-board>
+
+    <app-message-board class="messageBoard" *ngIf="project" [project]="project" [memberOfProject]="memberOfProject">
+    </app-message-board>
     <div class="links white p-3">
         <ng-container *ngIf="isAdmin; else notAdmin">
             <p>You are Admin of this project</p>
             <ng-container *ngIf="notApprovedApplications && notApprovedApplications.length > 0; else noApplications">
                 Pending Applications! <button class="btn btn-primary mt-2" (click)="gotoApplications()">Go to
                     applications</button>
+            </ng-container>
+            <ng-container>
+                <br>
+                <button class="btn btn-primary mt-2" (click)="addPhoto()">Add Photos</button>
+                <br>
+                <button class="btn btn-danger mt-2" (click)="deleteProject()">Delete Project</button>
             </ng-container>
             <ng-template #noApplications>
                 No applications!
@@ -30,11 +42,43 @@
             </ng-container>
         </ng-template>
         <h2 class="fs-5 my-4">Progress status: {{this.progress}}</h2>
+
+        <p class="keywordTitle">Keywords</p>
+        <ng-container *ngIf="project.keywords; else noKeywords">
+            <ng-container *ngIf="project.keywords.length > 0; else noKeywords">
+                <span class="keyword" *ngFor="let keyword of project.keywords">{{keyword}}</span>
+            </ng-container>
+        </ng-container>
+        <ng-template #noKeywords>
+            <p class="mt-4">There are no keywords</p>
+        </ng-template>
+
     </div>
     <div class="members white"></div>
 </main>
 
 <!-- Modal -->
+<div class="modal" tabindex="-1" [ngStyle]="{'display':modalPhotoDisplay}" *ngIf="project">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Add a photo to {{project.projectName}}</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                    (click)="closeModalPhoto()"></button>
+            </div>
+            <div class="modal-body">
+                <label for="second">Add url for photo</label>
+                <input class="form-control" name="second" [(ngModel)]="photoUrl"/>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+                    (click)="closeModalPhoto()">Close</button>
+                <button type="button" class="btn btn-primary" (click)="submitPhoto()">Add photo</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div class="modal" tabindex="-1" [ngStyle]="{'display':modalDisplay}" *ngIf="project">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -58,4 +102,3 @@
 <app-approve-applications *ngIf="isAdmin && showApplications" [project]="project"
     [notApprovedApplications]=notApprovedApplications (closeEvent)="closeApplications($event)">
 </app-approve-applications>
-

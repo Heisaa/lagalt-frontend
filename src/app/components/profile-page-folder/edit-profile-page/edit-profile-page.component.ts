@@ -18,7 +18,8 @@ export class EditProfilePageComponent implements OnInit {
   userDetails: User | undefined;
   projects: Project[] = [];
   image: string = "";
-  skills: Skill[] = [];
+  skills: string[] = []
+  newSkills: string[] = [];
 
   constructor(private readonly projectService: ProjectsService, private readonly router: Router, private readonly userService: UserService,private readonly keycloak: KeycloakService) { }
 
@@ -51,6 +52,14 @@ export class EditProfilePageComponent implements OnInit {
     }
   }*/
 
+  onSkillChage(event: any) {
+
+  }
+
+  addSkill() {
+    
+  }
+
   saveProfile() {
     console.log(this.userDetails?.description)
   }
@@ -74,11 +83,22 @@ export class EditProfilePageComponent implements OnInit {
 
   getUser(id: string) {
     this.userService.getUserById(id)
-      .subscribe((data: any) => {
+      .subscribe((data: User) => {
         this.userDetails = data;
-        this.image = "https://avatars.dicebear.com/api/open-peeps/" + data.userName + ".svg"
         this.skills = data.skills;
+        this.image = "https://avatars.dicebear.com/api/open-peeps/" + data.userName + ".svg"
+        this.getSkills();
       });
+  }
+
+  getSkills() {
+    this.userService.getSkills()
+      .subscribe((data: Skill[]) => {
+        console.log(data)
+        console.log(this.userDetails?.skills)
+        this.newSkills = data.filter(skill => !this.userDetails?.skills.some(userSkill => skill.skillName == userSkill)).map(skill => skill.skillName)
+        console.log(this.newSkills)
+      })
   }
   
   /*checkUser (id: string)  {

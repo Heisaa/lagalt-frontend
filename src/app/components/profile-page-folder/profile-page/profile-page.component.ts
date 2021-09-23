@@ -82,7 +82,6 @@ export class ProfilePageComponent implements OnInit {
       .subscribe((data: User) => {
 
         this.userDetails = data;
-        this.skills = data.skills;
         this.isOwnPageCheck(this.idFromUrl);
         console.log(this.isOwnPage)
         this.image = "https://avatars.dicebear.com/api/open-peeps/" + data.userName + ".svg"

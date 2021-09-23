@@ -102,11 +102,13 @@ export class ProjectPageComponent implements OnInit {
   }
   
   deleteProject() {
-    this.projectService.deleteProject(this.projectIdFromUrl).
+    if ( this.projectIdFromUrl != undefined) {
+      this.projectService.deleteProject(this.projectIdFromUrl).
       subscribe(() => {
         var url = this.userProfile == null ? "" : "profile/" + this.userProfile.id;
         this.router.navigateByUrl(url);
       })
+    }
   }
 
   applyToProject() {

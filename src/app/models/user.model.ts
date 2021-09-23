@@ -5,14 +5,14 @@ export interface User {
     profilePhoto?: string;
     description?: string;
     hidden: boolean;
-    skills: Skill[];
+    skills: string[];
     fields: Field[];
     portfolios: Portfolio[];
 } 
 
 export interface Skill {
-    id: number;
-    name: string;
+    skillId: number;
+    skillName: string;
 }
 
 export interface Field{

@@ -5,7 +5,7 @@ import { KeycloakProfile } from 'keycloak-js';
 import { throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
-import { User } from '../models/user.model';
+import { Skill, User } from '../models/user.model';
 
 @Injectable({
   providedIn: 'root'
@@ -25,6 +25,10 @@ export class UserService {
 
   putUser(user: User, userId: string) {
     return this.http.put<User>(this.userBaseUrl + "?userId=" + userId, user);
+  }
+
+  getSkills() {
+    return this.http.get<Skill[]>(environment.apiUrl + "Skills");
   }
 
 }

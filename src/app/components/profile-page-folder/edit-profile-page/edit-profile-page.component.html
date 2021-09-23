@@ -33,11 +33,17 @@
         </app-portfolio-list-item>
       </div>
   
-      <div class="rightLowerContainer white">
+      <div class="rightLowerContainer white d-flex flex-column">
         <!--<ng-container *ngIf="user.skills">-->
         <ul class="skillList list-group list-group-flush">
-          <li class="list-group-item" *ngFor="let skill of userDetails?.skills; let i = index">{{i + 1}} {{skill}}</li>
+          <li class="list-group-item" *ngFor="let skill of skills; let i = index">{{i + 1}} {{skill}}</li>
         </ul>
+        <select class="form-select" id="" (change)="onSkillChage($event)">
+          <option *ngFor="let newSkill of newSkills" [value]="newSkill">{{newSkill}}</option>
+        </select>
+        
+        <button class="btn btn-primary mt-2 align-self-center" (click)="addSkill()">Add Skill</button>
+        
   
         <!--</ng-container>-->
   
