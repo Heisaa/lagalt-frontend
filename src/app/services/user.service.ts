@@ -1,5 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { KeycloakService } from 'keycloak-angular';
+import { KeycloakProfile } from 'keycloak-js';
+import { throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { User } from '../models/user.model';
 
@@ -9,9 +13,9 @@ import { User } from '../models/user.model';
 export class UserService {
   private userBaseUrl = environment.apiUrl + "users/"
 
-  constructor(private readonly http: HttpClient) { }
+  constructor(private readonly http: HttpClient, private readonly keycloak: KeycloakService) { }
 
-  getUserById(id: string)  {
+  getUserById(id: string) {
     return this.http.get<User>(this.userBaseUrl + id);
   }
 

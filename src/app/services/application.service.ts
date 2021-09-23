@@ -23,4 +23,8 @@ export class ApplicationService {
   setApproved(applicationId: number, ownerId: string) {
     return this.http.put<any>(this.applicationUrl, {}, { params: { applicationId, ownerId } })
   }
+
+  deleteApplication(applicationId: number) {
+    return this.http.delete(this.applicationUrl + "?applicationId=" + applicationId);
+  }
 }

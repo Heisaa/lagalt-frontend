@@ -77,7 +77,7 @@ export class EditProfilePageComponent implements OnInit {
 
   getUser(id: string) {
     this.userService.getUserById(id)
-      .subscribe((data: User) => {
+      .subscribe((data: any) => {
         this.userDetails = data;
         
         //this.portfolios = data.portfolios;

@@ -25,11 +25,11 @@ export class ApproveApplicationsComponent implements OnInit {
   public isLoggedIn = false;
 
   constructor(
-    private readonly userService: UserService, 
+    private readonly userService: UserService,
     private readonly applicationService: ApplicationService,
     private readonly keycloak: KeycloakService,
     private readonly projectService: ProjectsService
-    ) { }
+  ) { }
 
   async ngOnInit() {
     // Get loggedin user
@@ -51,8 +51,8 @@ export class ApproveApplicationsComponent implements OnInit {
       console.log(form.value)
       for (const [key, value] of Object.entries(form.value)) {
         if (this.userProfile != null && this.userProfile.id != undefined) {
+          const applicationId = Number(key.slice(11));
           if (value === "approve") {
-            const applicationId = Number(key.slice(11));
             // Set the applications to approved
             this.setApproved(applicationId, this.userProfile.id);
             // Connect the user and project
@@ -61,7 +61,7 @@ export class ApproveApplicationsComponent implements OnInit {
               this.projectService.addUserToProject(this.project.projectId, userIdToBeAdded);
             }
           } else {
-            // Deny the application
+            this.deleteApplication(applicationId)
           }
         }
       }
@@ -89,11 +89,16 @@ export class ApproveApplicationsComponent implements OnInit {
           }
           this.displayApplications.push(appDisplay);
         }
-      })
+      }
+      )
   }
 
   setApproved(applicationId: number, ownerId: string) {
     this.applicationService.setApproved(applicationId, ownerId)
       .subscribe();
+  }
+
+  deleteApplication(applicationId: number) {
+    this.applicationService.deleteApplication(applicationId).subscribe();
   }
 }

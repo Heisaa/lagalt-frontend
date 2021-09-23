@@ -28,13 +28,15 @@ export class AppComponent implements OnInit {
       if (this.userProfile !== null || this.userProfile !== undefined) {
         var id = this.userProfile.id;
         this.userService.getUserById(id!)
-          .subscribe((data: User) => {
-            if (data === null || data === undefined) {
-              //userservice POST new user and route to Editpage
-              this.addUserToDatabase();
-              this.router.navigateByUrl("profile/edit/" + id);
+          .subscribe(
+            (data: User) => {},
+            (error: any) => {
+              if (error.status === 404) {
+                this.addUserToDatabase();
+              }
+
             }
-          });
+          );
       }
     }
   }
@@ -69,6 +71,7 @@ export class AppComponent implements OnInit {
     this.userService.postUser(user)
       .subscribe((data: User) => {
         console.log(data);
+        this.router.navigateByUrl("profile/edit/" + data.userId);
       });
   }
 

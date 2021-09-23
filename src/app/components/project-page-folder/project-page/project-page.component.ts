@@ -39,10 +39,6 @@ export class ProjectPageComponent implements OnInit {
     if (this.isLoggedIn) {
       this.userProfile = await this.keycloak.loadUserProfile();
 
-      //Ta bort sen
-      // this.keycloak.getToken()
-      //   .then(token => console.log(token))
-
     }
 
     this.projectIdFromUrl = Number(this.route.snapshot.paramMap.get("id"));

@@ -1,8 +1,7 @@
 <main *ngIf="isHidden" class="profilePageContainer text-break container">
   <ng-container *ngIf="userDetails">
     <div class="profileDivContainer">
-      <img class="m-2" id="profilePicture" *ngIf="userDetails.profilePhoto"
-        src="hasPicture ? userDetails.profilePhoto : defaultImage" alt="">
+      <img class="m-2" id="profilePicture" [src]="image" alt="">
 
       <h1 class="m-2" id="usernameTitle" *ngIf="userDetails.userName">{{userDetails.userName}}</h1>
 
@@ -22,7 +21,7 @@
     </div>
 
     <div class="projectContainer">
-      <h2 class="m-1" >Projects</h2>
+      <h2 class="m-1">Projects</h2>
       <app-project-item class="projectListItem" *ngFor="let project of projects" [project]="project">
       </app-project-item>
     </div>
@@ -37,7 +36,7 @@
 
     <div class="rightLowerContainer">
       <!--<ng-container *ngIf="user.skills">-->
-        <h2 class="m-1">Skills</h2>
+      <h2 class="m-1">Skills</h2>
       <ul class="skillList list-group list-group-flush">
         <li class="list-group-item" *ngFor="let skill of userDetails?.skills; let i = index">{{i + 1}} {{skill}}</li>
       </ul>
@@ -52,7 +51,7 @@
   <ng-container *ngIf="userDetails">
     <div class="profileDivContainer">
       <img class="m-2" id="profilePicture"
-        src="https://www.pngarts.com/files/10/Default-Profile-Picture-PNG-High-Quality-Image.png" alt="">
+      [src]="image" alt="">
 
       <h1 class="m-2" id="usernameTitle" *ngIf="userDetails.userName">{{userDetails.userName}}</h1>
 
