@@ -7,24 +7,33 @@
             {{project.description}}
         </p>
     </div>
-    <app-message-board class="messageBoard" *ngIf="project" [project]="project"></app-message-board>
+    <app-message-board class="messageBoard" *ngIf="project" [project]="project" [memberOfProject]="memberOfProject"></app-message-board>
     <div class="links white p-3">
         <ng-container *ngIf="isAdmin; else notAdmin">
+            <p>You are Admin of this project</p>
             <ng-container *ngIf="notApprovedApplications && notApprovedApplications.length > 0; else noApplications">
-                Pending Applications! <button class="btn btn-primary mt-2" (click)="gotoApplications()">Go to applications</button>
+                Pending Applications! <button class="btn btn-primary mt-2" (click)="gotoApplications()">Go to
+                    applications</button>
             </ng-container>
             <ng-template #noApplications>
                 No applications!
             </ng-template>
         </ng-container>
         <ng-template #notAdmin>
-            <Button class="btn btn-primary" (click)="openModal()">Apply to Project</Button>
-            <p>{{applicationFeedback}}</p>
+            <ng-container *ngIf="isLoggedIn && !memberOfProject">
+                <Button class="btn btn-primary" (click)="openModal()">Apply to Project</Button>
+                <p>{{applicationFeedback}}</p>
+            </ng-container>
+            <ng-container *ngIf="memberOfProject">
+                <p>You are a member of this project</p>
+            </ng-container>
         </ng-template>
         <h2 class="fs-5 my-4">Progress status: {{this.progress}}</h2>
     </div>
     <div class="members white"></div>
 </main>
+
+<!-- Modal -->
 <div class="modal" tabindex="-1" [ngStyle]="{'display':modalDisplay}" *ngIf="project">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -45,4 +54,6 @@
         </div>
     </div>
 </div>
-<app-approve-applications *ngIf="isAdmin && showApplications" [project]="project" [notApprovedApplications]=notApprovedApplications (closeEvent)="closeApplications($event)"></app-approve-applications>
+<app-approve-applications *ngIf="isAdmin && showApplications" [project]="project"
+    [notApprovedApplications]=notApprovedApplications (closeEvent)="closeApplications($event)">
+</app-approve-applications>

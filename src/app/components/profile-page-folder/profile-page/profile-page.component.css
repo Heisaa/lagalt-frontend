@@ -6,7 +6,7 @@ main {
     display: grid;
     grid-template-areas: 
                     "profileDivContainer rightUpperContainer"
-                    "hiddenExplanationContainer rightLowerContainer"
+                    "hiddenExplanationContainer hiddenExplanationContainer"
                     "projectContainer rightLowerContainer"
                     "portfolioContainer rightLowerContainer";
 

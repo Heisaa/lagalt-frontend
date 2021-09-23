@@ -1,17 +1,19 @@
-<main class="editProfilePageContainer text-break container">
+<main class="editProfilePageContainer text-break container mt-4">
     <ng-container *ngIf="userDetails">
-      <div class="profileDivContainer">
-        <img class="m-2" id="profilePicture"
-          src="https://www.pngarts.com/files/10/Default-Profile-Picture-PNG-High-Quality-Image.png" alt="">
+      <div class="profileDivContainer white p-4">
+        <img class="me-4" id="profilePicture"
+          [src]="image" alt="">
   
-        <h1 class="m-2" id="usernameTitle" *ngIf="userDetails.userName">{{userDetails.userName}}</h1>
+        <h1 id="usernameTitle" *ngIf="userDetails.userName">{{userDetails.userName}}</h1>
   
         <!--<p *ngIf="userProfile?.id">{{userProfile?.id}}</p>-->
-        <input type="text" class="m-2" id="profileDescription" *ngIf="userDetails?.description" value="{{userDetails?.description}}">>
+        <textarea class="form-control" rows="3" name="first" [(ngModel)]="userDetails.description"></textarea>
   
       </div>
-      <div class="rightUpperContainer d-flex justify-content-end align-items-start">
-        <div class="btn-group m-2" role="group" aria-label="Basic radio toggle button group">
+      <div class="rightUpperContainer d-flex justify-content-evenly align-items-center flex-column white">
+        <button class="btn btn-primary" (click)="saveProfile()">Save Profile</button>
+
+        <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
           <input type="radio" class="btn-check " name="btnradio" id="btnradio1" autocomplete="off" checked>
           <label class="btn btn-outline-success" for="btnradio1">Regular</label>
   
@@ -20,19 +22,17 @@
         </div>
       </div>
   
-      <div class="projectContainer">
+      <div class="projectContainer white">
         <app-project-item class="projectListItem" *ngFor="let project of projects" [project]="project">
         </app-project-item>
       </div>
-      <div class="portfolioContainer">
+      <div class="portfolioContainer white">
         <app-portfolio-list-item class="portfolioListItem" *ngFor="let portfolio of userDetails?.portfolios"
           [portfolio]="portfolio">
         </app-portfolio-list-item>
       </div>
   
-      <div class="hiddenExplanationContainer"></div>
-  
-      <div class="rightLowerContainer">
+      <div class="rightLowerContainer white">
         <!--<ng-container *ngIf="user.skills">-->
         <ul class="skillList list-group list-group-flush">
           <li class="list-group-item" *ngFor="let skill of userDetails?.skills; let i = index">{{i + 1}} {{skill}}</li>

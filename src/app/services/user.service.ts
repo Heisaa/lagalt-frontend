@@ -11,20 +11,20 @@ import { User } from '../models/user.model';
   providedIn: 'root'
 })
 export class UserService {
-  private userBaseUrl = environment.apiUrl + "users/"
+  private userBaseUrl = environment.apiUrl + "users"
 
   constructor(private readonly http: HttpClient, private readonly keycloak: KeycloakService) { }
 
   getUserById(id: string) {
-    return this.http.get<User>(this.userBaseUrl + id);
+    return this.http.get<User>(this.userBaseUrl + "/" + id);
   }
 
   postUser(user: User) {
     return this.http.post<User>(this.userBaseUrl, user);
   }
 
-  /*putUser(user: User) {
-    return this.http.put<User>(this.userBaseUrl, user);
-  }*/
+  putUser(user: User, userId: string) {
+    return this.http.put<User>(this.userBaseUrl + "?userId=" + userId, user);
+  }
 
 }

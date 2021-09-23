@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { KeycloakService } from 'keycloak-angular';
 import { KeycloakProfile } from 'keycloak-js';
 import { Project } from 'src/app/models/project.model';
-import { User } from 'src/app/models/user.model';
+import { Skill, User } from 'src/app/models/user.model';
 import { ProjectsService } from 'src/app/services/projects.service';
 import { UserService } from 'src/app/services/user.service';
 
@@ -17,6 +17,8 @@ export class EditProfilePageComponent implements OnInit {
   public userProfile: KeycloakProfile | null = null;
   userDetails: User | undefined;
   projects: Project[] = [];
+  image: string = "";
+  skills: Skill[] = [];
 
   constructor(private readonly projectService: ProjectsService, private readonly router: Router, private readonly userService: UserService,private readonly keycloak: KeycloakService) { }
 
@@ -49,6 +51,10 @@ export class EditProfilePageComponent implements OnInit {
     }
   }*/
 
+  saveProfile() {
+    console.log(this.userDetails?.description)
+  }
+
   getProjects(id: string) {
     this.projectService.getProjectsByUser(id)
       .subscribe((data: Project[]) => {
@@ -59,28 +65,19 @@ export class EditProfilePageComponent implements OnInit {
       })
   }
 
-
- /* postUser(user: User) {
-    this.userService.postUser(user)
-    .subscribe((data: User) => {
-      console.log(data);
-      this.checkUser(user.userId);
-    });
-  }*/
-
-  /*putUser(user: User) {
-    this.userService.putUser(user)
+  putUser(user: User, userId: string) {
+    this.userService.putUser(user, userId)
     .subscribe(data => {
       console.log(data);
     });
-  }*/
+  }
 
   getUser(id: string) {
     this.userService.getUserById(id)
       .subscribe((data: any) => {
         this.userDetails = data;
-        
-        //this.portfolios = data.portfolios;
+        this.image = "https://avatars.dicebear.com/api/open-peeps/" + data.userName + ".svg"
+        this.skills = data.skills;
       });
   }
   

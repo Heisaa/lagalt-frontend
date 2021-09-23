@@ -16,6 +16,7 @@ export class MessageBoardComponent implements OnInit {
   submittedMessage = "";
   public isLoggedIn = false;
   public userProfile: KeycloakProfile | null = null;
+  @Input() memberOfProject: boolean | undefined = false;
 
   constructor(
     private readonly projectService: ProjectsService,
@@ -29,6 +30,7 @@ export class MessageBoardComponent implements OnInit {
     this.isLoggedIn = await this.keycloak.isLoggedIn();
     if (this.isLoggedIn) {
       this.userProfile = await this.keycloak.loadUserProfile();
+      
     }
   }
 

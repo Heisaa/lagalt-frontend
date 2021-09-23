@@ -25,6 +25,7 @@ export class ProjectPageComponent implements OnInit {
   isAdmin = false;
   notApprovedApplications: ApplicationGet[] | undefined;
   showApplications = false;
+  memberOfProject: boolean | undefined = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -63,8 +64,9 @@ export class ProjectPageComponent implements OnInit {
         this.project = data;
         this.progress = this.progressSteps[data.progress];
         if (this.userProfile != null) {
-          console.log(this.project.projectUsers.filter(user => user.owner === true)[0].userId)
-          this.isAdmin = this.userProfile.id === this.project.projectUsers.filter(user => user.owner === true)[0].userId;
+          this.isAdmin = this.userProfile.id === this.project.projectUsers.find(user => user.owner === true)?.userId;
+          this.memberOfProject = this.project?.projectUsers.some(user => user.userId == this.userProfile?.id)
+          console.log(this.memberOfProject)
           console.log(this.isAdmin)
         }
         if (this.isAdmin) {// compare userid adminid
@@ -73,7 +75,6 @@ export class ProjectPageComponent implements OnInit {
       });
   }
 
-  //Todo kolla så att man inte är admin eller redan är med i projektet, visa då inte knappen i html
   applyToProject() {
 
     if (this.userProfile != null && this.userProfile.id != undefined && this.project != null) {

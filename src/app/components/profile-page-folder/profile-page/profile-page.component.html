@@ -1,6 +1,6 @@
-<main *ngIf="isHidden" class="profilePageContainer text-break container">
+<main *ngIf="isHidden" class="profilePageContainer text-break container mt-4">
   <ng-container *ngIf="userDetails">
-    <div class="profileDivContainer">
+    <div class="profileDivContainer white">
       <img class="m-2" id="profilePicture" [src]="image" alt="">
 
       <h1 class="m-2" id="usernameTitle" *ngIf="userDetails.userName">{{userDetails.userName}}</h1>
@@ -11,21 +11,17 @@
     </div>
     <div class=" m-2 rightUpperContainer d-flex justify-content-end align-items-start">
       <div class="btn-group m-2;" role="group" aria-label="Basic radio toggle button group">
-        <input type="radio" class="btn-check " name="btnradio" id="btnradio1" autocomplete="off" checked>
-        <label class="btn btn-outline-success" for="btnradio1">Regular</label>
-
-        <input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off">
-        <label class="btn btn-outline-danger" for="btnradio2">Hidden</label>
+        <button class="btn btn-primary" *ngIf="isOwnPage" (click)="gotoEdit()">Edit Profile</button>
       </div>
       <!--<button *ngIf="isOwnPage" class="btn btn-warning m-2" (click)="goToEdit()">Edit</button>-->
     </div>
 
-    <div class="projectContainer">
+    <div class="projectContainer white p-4">
       <h2 class="m-1">Projects</h2>
       <app-project-item class="projectListItem" *ngFor="let project of projects" [project]="project">
       </app-project-item>
     </div>
-    <div class="portfolioContainer">
+    <div class="portfolioContainer white p-4">
       <h2 class="m-1">Portfolio</h2>
       <app-portfolio-list-item class="portfolioListItem" *ngFor="let portfolio of userDetails?.portfolios"
         [portfolio]="portfolio">
@@ -34,7 +30,7 @@
 
     <div class="hiddenExplanationContainer"></div>
 
-    <div class="rightLowerContainer">
+    <div class="rightLowerContainer white p-4">
       <!--<ng-container *ngIf="user.skills">-->
       <h2 class="m-1">Skills</h2>
       <ul class="skillList list-group list-group-flush">
