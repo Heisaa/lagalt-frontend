@@ -13,7 +13,7 @@ import { ProjectsService } from 'src/app/services/projects.service';
   styleUrls: ['./project-page.component.css']
 })
 export class ProjectPageComponent implements OnInit {
-  projectIdFromUrl: number;
+  projectIdFromUrl: number | undefined;
   project: Project | undefined;
   progressSteps = ["Founding", "In progress", "Stalled", "Completed"];
   progress: string | undefined;
@@ -27,6 +27,7 @@ export class ProjectPageComponent implements OnInit {
   isAdmin = false;
   notApprovedApplications: ApplicationGet[] | undefined;
   showApplications = false;
+  memberOfProject: boolean | undefined = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -34,22 +35,16 @@ export class ProjectPageComponent implements OnInit {
     private readonly keycloak: KeycloakService,
     private readonly applicationService: ApplicationService,
     private readonly router: Router,
-  ) {
-    this.projectIdFromUrl = Number(this.route.snapshot.paramMap.get("id"));
-   }
+  ) { }
 
   async ngOnInit() {
     this.isLoggedIn = await this.keycloak.isLoggedIn();
     if (this.isLoggedIn) {
       this.userProfile = await this.keycloak.loadUserProfile();
 
-      //Ta bort sen
-      // this.keycloak.getToken()
-      //   .then(token => console.log(token))
-
     }
 
-    
+    this.projectIdFromUrl = Number(this.route.snapshot.paramMap.get("id"));
     this.getProject(this.projectIdFromUrl);
   }
 
@@ -57,6 +52,14 @@ export class ProjectPageComponent implements OnInit {
     this.showApplications = true;
   }
 
+  closeApplications(close: boolean) {
+    this.showApplications = false;
+    // Reload applications when closing application window
+    if (this.project != undefined) {
+      this.getApplicationsByProjects(this.project.projectId);
+    }
+  }
+  
   hasNoPhotos() {  
     return (this.project?.photos.length == 0);
   }
@@ -81,22 +84,15 @@ export class ProjectPageComponent implements OnInit {
     this.modalPhotoDisplay = "none";
   }
 
-  closeApplications(close: boolean) {
-    this.showApplications = false;
-    // Reload applications when closing application window
-    if (this.project != undefined) {
-      this.getApplicationsByProjects(this.project.projectId);
-    }
-  }
-
   getProject(id: number) {
     this.projectService.getProject(id)
       .subscribe((data: Project) => {
         this.project = data;
         this.progress = this.progressSteps[data.progress];
         if (this.userProfile != null) {
-          console.log(this.project.projectUsers.filter(user => user.owner === true)[0].userId)
-          this.isAdmin = this.userProfile.id === this.project.projectUsers.filter(user => user.owner === true)[0].userId;
+          this.isAdmin = this.userProfile.id === this.project.projectUsers.find(user => user.owner === true)?.userId;
+          this.memberOfProject = this.project?.projectUsers.some(user => user.userId == this.userProfile?.id)
+          console.log(this.memberOfProject)
           console.log(this.isAdmin)
         }
         if (this.isAdmin) {// compare userid adminid
@@ -104,8 +100,15 @@ export class ProjectPageComponent implements OnInit {
         }
       });
   }
+  
+  deleteProject() {
+    this.projectService.deleteProject(this.projectIdFromUrl).
+      subscribe(() => {
+        var url = this.userProfile == null ? "" : "profile/" + this.userProfile.id;
+        this.router.navigateByUrl(url);
+      })
+  }
 
-  //Todo kolla så att man inte är admin eller redan är med i projektet, visa då inte knappen i html
   applyToProject() {
 
     if (this.userProfile != null && this.userProfile.id != undefined && this.project != null) {
@@ -121,14 +124,6 @@ export class ProjectPageComponent implements OnInit {
       this.applicationFeedback = "You have applied to this project!";
       this.closeModal();
     }
-  }
-
-  deleteProject() {
-    this.projectService.deleteProject(this.projectIdFromUrl).
-      subscribe(() => {
-        var url = this.userProfile == null ? "" : "profile/" + this.userProfile.id;
-        this.router.navigateByUrl(url);
-      })
   }
 
   addApplication(application: Application) {
@@ -157,3 +152,4 @@ export class ProjectPageComponent implements OnInit {
   }
 
 }
+

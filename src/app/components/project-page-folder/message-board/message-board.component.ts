@@ -1,3 +1,4 @@
+
 import { Component, Input, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { KeycloakService } from 'keycloak-angular';
@@ -16,6 +17,7 @@ export class MessageBoardComponent implements OnInit {
   submittedMessage = "";
   public isLoggedIn = false;
   public userProfile: KeycloakProfile | null = null;
+  @Input() memberOfProject: boolean | undefined = false;
 
   constructor(
     private readonly projectService: ProjectsService,
@@ -29,6 +31,7 @@ export class MessageBoardComponent implements OnInit {
     this.isLoggedIn = await this.keycloak.isLoggedIn();
     if (this.isLoggedIn) {
       this.userProfile = await this.keycloak.loadUserProfile();
+      
     }
   }
 
@@ -62,3 +65,4 @@ export class MessageBoardComponent implements OnInit {
   }
 
 }
+

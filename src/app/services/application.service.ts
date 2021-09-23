@@ -1,3 +1,4 @@
+
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
@@ -22,5 +23,9 @@ export class ApplicationService {
 
   setApproved(applicationId: number, ownerId: string) {
     return this.http.put<any>(this.applicationUrl, {}, { params: { applicationId, ownerId } })
+  }
+
+  deleteApplication(applicationId: number) {
+    return this.http.delete(this.applicationUrl + "?applicationId=" + applicationId);
   }
 }
