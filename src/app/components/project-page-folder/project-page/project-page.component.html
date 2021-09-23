@@ -1,3 +1,4 @@
+
 <main *ngIf="project" class="container">
     <app-photo-display class="projectImage" [project]="project"></app-photo-display>
 
@@ -57,3 +58,4 @@
 <app-approve-applications *ngIf="isAdmin && showApplications" [project]="project"
     [notApprovedApplications]=notApprovedApplications (closeEvent)="closeApplications($event)">
 </app-approve-applications>
+

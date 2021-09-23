@@ -1,3 +1,4 @@
+
 import { Component, Input, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { KeycloakService } from 'keycloak-angular';
@@ -64,3 +65,4 @@ export class MessageBoardComponent implements OnInit {
   }
 
 }
+

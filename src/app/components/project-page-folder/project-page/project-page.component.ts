@@ -22,6 +22,8 @@ export class ProjectPageComponent implements OnInit {
   public userProfile: KeycloakProfile | null = null;
   modalDisplay = "none";
   motivation = "";
+  modalPhotoDisplay = "none"
+  photoUrl = ""
   isAdmin = false;
   notApprovedApplications: ApplicationGet[] | undefined;
   showApplications = false;
@@ -57,6 +59,30 @@ export class ProjectPageComponent implements OnInit {
       this.getApplicationsByProjects(this.project.projectId);
     }
   }
+  
+  hasNoPhotos() {  
+    return (this.project?.photos.length == 0);
+  }
+
+  addPhoto() {
+    console.log("hej")
+    this.modalPhotoDisplay = "block";
+  }
+
+  closeModalPhoto() {
+    this.photoUrl = "";
+    this.modalPhotoDisplay = "none";
+  }
+
+  submitPhoto() {
+    if (this.project != undefined && this.photoUrl != "") {
+      this.projectService.addPhotoToProject(this.project.projectId, this.photoUrl)
+        .subscribe(response => {
+          console.log(response)
+        })
+    }
+    this.modalPhotoDisplay = "none";
+  }
 
   getProject(id: number) {
     this.projectService.getProject(id)
@@ -73,6 +99,14 @@ export class ProjectPageComponent implements OnInit {
           this.getApplicationsByProjects(data.projectId);
         }
       });
+  }
+  
+  deleteProject() {
+    this.projectService.deleteProject(this.projectIdFromUrl).
+      subscribe(() => {
+        var url = this.userProfile == null ? "" : "profile/" + this.userProfile.id;
+        this.router.navigateByUrl(url);
+      })
   }
 
   applyToProject() {
@@ -118,3 +152,4 @@ export class ProjectPageComponent implements OnInit {
   }
 
 }
+

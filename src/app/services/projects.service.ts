@@ -1,9 +1,7 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { throwError } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Message, PostMessage, Project, ProjectPage, PostProject } from '../models/project.model';
-import { catchError } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -36,12 +34,23 @@ export class ProjectsService {
     return this.http.post<PostMessage>(this.messageUrl, message);
   }
 
-  createProject(project: PostProject) {
-    return this.http.post<PostProject>("https://lagaltapibackend.azurewebsites.net/api/projects", project);
+  createProject(project: any, userId: string) {
+    return this.http.post<any>(this.projectsUrl + "?userId=" + userId, project);
   }
 
   addUserToProject(projectId: number, userId: string) {
     return this.http.put<any>(this.projectsUrl + "/" + projectId + "/user/" + userId, {}, {params: {projectId, userId}})
   }
 
+  deleteProject(projectId: number) {
+    return this.http.delete<any>(this.projectsUrl + "/" + projectId);
+  }
+
+  addPhotoToProject(projectId: number, photoUrl: string) {
+    var test = {
+      projectId: projectId,
+      photoUrl: photoUrl
+    }
+    return this.http.post<any>(environment.apiUrl + "Photo", test);
+  }
 }

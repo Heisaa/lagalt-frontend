@@ -78,3 +78,4 @@ export class AppComponent implements OnInit {
   //check if exists in db, if not = new user -> edit profile component. use keycloak service in edit component
   // add to db in app component cal
 }
+
