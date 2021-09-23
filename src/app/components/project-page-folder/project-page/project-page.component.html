@@ -35,6 +35,17 @@
             <p>{{applicationFeedback}}</p>
         </ng-template>
         <h2 class="fs-5 my-4">Progress status: {{this.progress}}</h2>
+
+        <p class="keywordTitle">Keywords</p>
+        <ng-container *ngIf="project.keywords; else noKeywords">
+            <ng-container *ngIf="project.keywords.length > 0; else noKeywords">
+                <span class="keyword" *ngFor="let keyword of project.keywords">{{keyword}}</span>
+            </ng-container>
+        </ng-container>
+        <ng-template #noKeywords>
+            <p class="mt-4">There are no messages</p>
+        </ng-template>
+
     </div>
     <div class="members white"></div>
 </main>
