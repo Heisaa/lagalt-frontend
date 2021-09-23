@@ -13,6 +13,9 @@
             <ng-container *ngIf="notApprovedApplications && notApprovedApplications.length > 0; else noApplications">
                 Pending Applications! <button class="btn btn-primary mt-2" (click)="gotoApplications()">Go to applications</button>
             </ng-container>
+            <ng-container>
+                <button class="btn btn-danger mt-2" (click)="deleteProject()">Delete Project</button>
+            </ng-container> 
             <ng-template #noApplications>
                 No applications!
             </ng-template>

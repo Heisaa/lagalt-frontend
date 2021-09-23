@@ -13,7 +13,7 @@ import { ProjectsService } from 'src/app/services/projects.service';
   styleUrls: ['./project-page.component.css']
 })
 export class ProjectPageComponent implements OnInit {
-  projectIdFromUrl: number | undefined;
+  projectIdFromUrl: number;
   project: Project | undefined;
   progressSteps = ["Founding", "In progress", "Stalled", "Completed"];
   progress: string | undefined;
@@ -32,7 +32,9 @@ export class ProjectPageComponent implements OnInit {
     private readonly keycloak: KeycloakService,
     private readonly applicationService: ApplicationService,
     private readonly router: Router,
-  ) { }
+  ) {
+    this.projectIdFromUrl = Number(this.route.snapshot.paramMap.get("id"));
+   }
 
   async ngOnInit() {
     this.isLoggedIn = await this.keycloak.isLoggedIn();
@@ -45,7 +47,7 @@ export class ProjectPageComponent implements OnInit {
 
     }
 
-    this.projectIdFromUrl = Number(this.route.snapshot.paramMap.get("id"));
+    
     this.getProject(this.projectIdFromUrl);
   }
 
@@ -93,6 +95,14 @@ export class ProjectPageComponent implements OnInit {
       this.applicationFeedback = "You have applied to this project!";
       this.closeModal();
     }
+  }
+
+  deleteProject() {
+    this.projectService.deleteProject(this.projectIdFromUrl).
+      subscribe(() => {
+        var url = this.userProfile == null ? "" : "profile/" + this.userProfile.id;
+        this.router.navigateByUrl(url);
+      })
   }
 
   addApplication(application: Application) {
