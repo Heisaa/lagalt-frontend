@@ -43,7 +43,7 @@ export interface PostMessage {
 }
 
 export interface PostProject {
-    projectName: string | undefined;
-    description: string | undefined;
-    urlReference: string | undefined;
+    projectName?: string;
+    description?: string;
+    urlReference?: string;
 }
