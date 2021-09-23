@@ -10,7 +10,6 @@ export class ProjectsService {
   private projectsUrl = environment.apiUrl + "projects";
   private projectsByUserUrl = environment.apiUrl + "users/projects/";
   private messageUrl = environment.apiUrl + "Message";
-  private projectId: number | undefined;
 
   constructor(private readonly http: HttpClient) { }
 
@@ -46,12 +45,4 @@ export class ProjectsService {
   deleteProject(projectId: number) {
     return this.http.delete<any>(this.projectsUrl + "/" + projectId);
   }
-
-  setProjectId(id: number) {
-    this.projectId = id;
-  }
-
-  getProjectId(){return this.projectId}
-
-
 }
