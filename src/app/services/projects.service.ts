@@ -45,4 +45,12 @@ export class ProjectsService {
   deleteProject(projectId: number) {
     return this.http.delete<any>(this.projectsUrl + "/" + projectId);
   }
+
+  addPhotoToProject(projectId: number, photoUrl: string) {
+    var test = {
+      projectId: projectId,
+      photoUrl: photoUrl
+    }
+    return this.http.post<any>(environment.apiUrl + "Photo", test);
+  }
 }
