@@ -38,8 +38,10 @@ export class ProjectsService {
     return this.http.post<any>(this.projectsUrl + "?userId=" + userId, project);
   }
 
-  addUserToProject(projectId: number, userId: string) {
-    return this.http.put<any>(this.projectsUrl + "/" + projectId + "/user/" + userId, {}, {params: {projectId, userId}})
+  addUserToProject(projectId: number, userId: string, owner: boolean) {
+    console.log(this.projectsUrl + "/" + projectId + "/user/" + userId + "?owner=" + owner);
+    
+    return this.http.put<any>(this.projectsUrl + "/" + projectId + "/user/" + userId + "?owner=" + owner, {})
   }
 
   deleteProject(projectId: number) {

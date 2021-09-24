@@ -1,6 +1,6 @@
 <div class="leftSide">
     <p class="text-light p-3 header">MY PROJECTS</p>
-    <div class="list-group list-group-flush" *ngIf="projectsForLoggedInUser; else noProjects">
+    <div class="list-group list-group-flush" *ngIf="projectsForLoggedInUser && projectsForLoggedInUser.length > 0; else noProjects">
         <button class="list-group-item list-group-item-action" *ngFor="let project of projectsForLoggedInUser" (click)="gotoProject(project.projectId)">
             {{project.projectName}}
         </button>
