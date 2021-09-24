@@ -59,7 +59,9 @@ export class ApproveApplicationsComponent implements OnInit {
             // Connect the user and project
             const userIdToBeAdded = this.displayApplications.find(application => application.applicationId === applicationId)?.userId;
             if (this.project != undefined && userIdToBeAdded != undefined) {
-              this.projectService.addUserToProject(this.project.projectId, userIdToBeAdded);
+              console.log("user added");
+              
+              this.projectService.addUserToProject(this.project.projectId, userIdToBeAdded, false).subscribe();
             }
           } else {
             this.deleteApplication(applicationId)
