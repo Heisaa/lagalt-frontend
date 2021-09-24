@@ -1,5 +1,12 @@
 # LagaltFrontend
 
+## Building Project
+
+To run this project locally:
+
+1. Run "npm install" to install all dependencies
+2. Run "ng serve" to start a local server (see angular instruction below)
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.2.2.
 
 ## Development server
