@@ -8,7 +8,7 @@
     <ng-template #noMessages>
         <p class="mt-4">There are no messages</p>
     </ng-template>
-    <div *ngIf="isLoggedIn" class="d-flex flex-column align-items-center mt-4" >
+    <div *ngIf="isLoggedIn && memberOfProject" class="d-flex flex-column align-items-center mt-4" >
         <textarea class="form-control" rows="3" name="first" [(ngModel)]="submittedMessage"></textarea>
         <button class="btn btn-primary mt-4" (click)="submitMessage()">Post Message</button>
     </div>

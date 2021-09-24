@@ -22,9 +22,12 @@ export class ProjectPageComponent implements OnInit {
   public userProfile: KeycloakProfile | null = null;
   modalDisplay = "none";
   motivation = "";
+  modalPhotoDisplay = "none"
+  photoUrl = ""
   isAdmin = false;
   notApprovedApplications: ApplicationGet[] | undefined;
   showApplications = false;
+  memberOfProject: boolean | undefined = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -38,10 +41,6 @@ export class ProjectPageComponent implements OnInit {
     this.isLoggedIn = await this.keycloak.isLoggedIn();
     if (this.isLoggedIn) {
       this.userProfile = await this.keycloak.loadUserProfile();
-
-      //Ta bort sen
-      // this.keycloak.getToken()
-      //   .then(token => console.log(token))
 
     }
 
@@ -60,6 +59,30 @@ export class ProjectPageComponent implements OnInit {
       this.getApplicationsByProjects(this.project.projectId);
     }
   }
+  
+  hasNoPhotos() {  
+    return (this.project?.photos.length == 0);
+  }
+
+  addPhoto() {
+    console.log("hej")
+    this.modalPhotoDisplay = "block";
+  }
+
+  closeModalPhoto() {
+    this.photoUrl = "";
+    this.modalPhotoDisplay = "none";
+  }
+
+  submitPhoto() {
+    if (this.project != undefined && this.photoUrl != "") {
+      this.projectService.addPhotoToProject(this.project.projectId, this.photoUrl)
+        .subscribe(response => {
+          console.log(response)
+        })
+    }
+    this.modalPhotoDisplay = "none";
+  }
 
   getProject(id: number) {
     this.projectService.getProject(id)
@@ -67,8 +90,9 @@ export class ProjectPageComponent implements OnInit {
         this.project = data;
         this.progress = this.progressSteps[data.progress];
         if (this.userProfile != null) {
-          console.log(this.project.projectUsers.filter(user => user.owner === true)[0].userId)
-          this.isAdmin = this.userProfile.id === this.project.projectUsers.filter(user => user.owner === true)[0].userId;
+          this.isAdmin = this.userProfile.id === this.project.projectUsers.find(user => user.owner === true)?.userId;
+          this.memberOfProject = this.project?.projectUsers.some(user => user.userId == this.userProfile?.id)
+          console.log(this.memberOfProject)
           console.log(this.isAdmin)
         }
         if (this.isAdmin) {// compare userid adminid
@@ -76,8 +100,17 @@ export class ProjectPageComponent implements OnInit {
         }
       });
   }
+  
+  deleteProject() {
+    if ( this.projectIdFromUrl != undefined) {
+      this.projectService.deleteProject(this.projectIdFromUrl).
+      subscribe(() => {
+        var url = this.userProfile == null ? "" : "profile/" + this.userProfile.id;
+        this.router.navigateByUrl(url);
+      })
+    }
+  }
 
-  //Todo kolla så att man inte är admin eller redan är med i projektet, visa då inte knappen i html
   applyToProject() {
 
     if (this.userProfile != null && this.userProfile.id != undefined && this.project != null) {
@@ -121,3 +154,4 @@ export class ProjectPageComponent implements OnInit {
   }
 
 }
+

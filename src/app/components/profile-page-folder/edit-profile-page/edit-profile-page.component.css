@@ -1,44 +1,37 @@
 
-
 main {
     width: 100%;
     min-height: 100%;
     display: grid;
     grid-template-areas: 
                     "profileDivContainer rightUpperContainer"
-                    "hiddenExplanationContainer rightLowerContainer"
                     "projectContainer rightLowerContainer"
                     "portfolioContainer rightLowerContainer";
 
     grid-template-columns: auto 250px;
-    grid-template-rows: 0.5fr auto auto 1fr;
+    grid-template-rows: 0.5fr 1fr 1fr;
     gap: 20px;
     box-sizing: border-box; 
     
 }
 
 .projectContainer {
-    background-color: lightgray;
     grid-area: projectContainer;
 }
 
 .portfolioContainer {
-    background-color: lightgray;
     grid-area: portfolioContainer;
 }
 
 .rightUpperContainer {
-    background-color: lightgray;
     grid-area: rightUpperContainer;
 }
 
 .rightLowerContainer {
-    background-color: lightgray;
     grid-area: rightLowerContainer;
 }
 
 .profileDivContainer {
-    background-color: lightgray;
     grid-area: profileDivContainer;
     display: grid;
     grid-template-areas: 
@@ -56,19 +49,16 @@ main {
 }
 
 #profilePicture {
-    background-color: darkgrey;
     max-width: 250px;
     max-height: 250px;
     grid-area: profilePicture;
 }
 
 #usernameTitle {
-    background-color: darkgrey;
     grid-area: usernameTitle;
 }
 
 #profileDescription {
-    background-color: darkgrey;
     grid-area: profileDescription;
 }
 

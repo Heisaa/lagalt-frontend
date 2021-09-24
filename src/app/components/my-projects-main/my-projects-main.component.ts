@@ -34,7 +34,6 @@ export class MyProjectsMainComponent implements OnInit {
         this.projectService.getProjectsByUser(userId)
           .subscribe((data: Project[]) => {
             this.projectsForLoggedInUser = data;
-            console.log(data)
           });
       }
     }

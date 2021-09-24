@@ -1,12 +1,11 @@
 
-
 main {
     width: 100%;
     min-height: 100%;
     display: grid;
     grid-template-areas: 
                     "profileDivContainer rightUpperContainer"
-                    "hiddenExplanationContainer rightLowerContainer"
+                    "hiddenExplanationContainer hiddenExplanationContainer"
                     "projectContainer rightLowerContainer"
                     "portfolioContainer rightLowerContainer";
 
@@ -94,3 +93,4 @@ main {
         width: 100%;
     }
 }
+
